@@ -1,0 +1,14 @@
+# TX15
+.vscode/
+*.o
+*.d
+*.elf
+*.axf
+*.map
+*.bin
+*.hex
+*.crf
+*.dep
+*.htm
+*.lnp
+*.sct
