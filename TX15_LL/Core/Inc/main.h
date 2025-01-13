@@ -38,6 +38,7 @@ extern "C" {
 #include "stm32h7xx_ll_pwr.h"
 #include "stm32h7xx_ll_dma.h"
 #include "stm32h7xx_ll_gpio.h"
+#include "stm32h7xx_ll_usart.h"
 
 #if defined(USE_FULL_ASSERT)
 #include "stm32_assert.h"
@@ -79,8 +80,7 @@ void Error_Handler(void);
 #define LED2_GPIO_Port GPIOI
 #define PWR_Pin LL_GPIO_PIN_12
 #define PWR_GPIO_Port GPIOH
-#define PWR_KEY_Pin LL_GPIO_PIN_4
-#define PWR_KEY_GPIO_Port GPIOA
+
 #ifndef NVIC_PRIORITYGROUP_0
 #define NVIC_PRIORITYGROUP_0         ((uint32_t)0x00000007) /*!< 0 bit  for pre-emption priority,
                                                                  4 bits for subpriority */
@@ -95,7 +95,7 @@ void Error_Handler(void);
 #endif
 
 /* USER CODE BEGIN Private defines */
-
+uint32_t millis(void);
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

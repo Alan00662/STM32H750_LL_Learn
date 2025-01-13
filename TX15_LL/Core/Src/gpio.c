@@ -71,11 +71,8 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = LL_GPIO_PULL_NO;
   LL_GPIO_Init(PWR_GPIO_Port, &GPIO_InitStruct);
 
-  /**/
-  GPIO_InitStruct.Pin = PWR_KEY_Pin;
-  GPIO_InitStruct.Mode = LL_GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = LL_GPIO_PULL_NO;
-  LL_GPIO_Init(PWR_KEY_GPIO_Port, &GPIO_InitStruct);
+  
+  LL_GPIO_SetOutputPin(PWR_GPIO_Port,PWR_Pin);
 
 }
 

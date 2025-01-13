@@ -20,10 +20,12 @@
 #include "main.h"
 #include "memorymap.h"
 #include "gpio.h"
+#include "usart.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "bsp_led.h"
+#include "bsp_key.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -38,6 +40,11 @@
 
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
+uint32_t milli_second=0;
+uint32_t millis(void)
+{
+	return milli_second;
+}
 
 /* USER CODE END PM */
 
@@ -92,22 +99,40 @@ int main(void)
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
-
+	LL_SYSTICK_EnableIT();	
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
-
+  KEY_GPIO_init();
+  MX_UART4_Init();
+  MX_UART5_Init();
+  MX_USART1_UART_Init();
+  MX_USART2_UART_Init();
+  MX_USART3_UART_Init();
+  MX_USART6_UART_Init();
   /* USER CODE END 2 */
-
+	debug_tx1("init uart1 ok\r\n");
+	LL_mDelay(100);
+	debug_tx2("init uart2 ok\r\n");
+		LL_mDelay(100);
+	debug_tx3("init uart3 ok\r\n");
+		LL_mDelay(100);
+	debug_tx4("init uart4 ok\r\n");
+		LL_mDelay(100);
+	debug_tx5("init uart5 ok\r\n");
+		LL_mDelay(100);
+	debug_tx6("init uart6 ok\r\n");
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
     /* USER CODE END WHILE */
-
+	led_Loop_bink(300);
+	  key_scan_Loop();
     /* USER CODE BEGIN 3 */
+
   }
   /* USER CODE END 3 */
 }
