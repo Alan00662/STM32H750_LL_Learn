@@ -20,7 +20,7 @@
 #include "task.h"
 #include "main.h"
 #include "cmsis_os.h"
-
+#include "board.h"
 /* Definitions for defaultTask */
 osThreadId_t defaultTaskHandle;
 const osThreadAttr_t defaultTask_attributes = {
@@ -77,10 +77,30 @@ void StartDefaultTask(void *argument)
 
 void led_task(void *argument)
 {
-
-  for(;;)
-  {
-	LL_GPIO_TogglePin(LED1_GPIO_Port, LED0_Pin);
+	static uint8_t bink_flg = 0;
+	for(;;)
+  { 
+		switch(bink_flg)
+		{
+			case 0:
+				LED0(1);
+				LED1(0);
+				LED2(0);
+				bink_flg ++;
+				break;
+			case 1:
+				LED0(0);
+				LED1(1);
+				LED2(0);
+				bink_flg ++;
+				break;
+			case 2:
+				LED0(0);
+				LED1(0);
+				LED2(1);
+				bink_flg =0;
+				break;
+		}
     osDelay(300);
   }
 

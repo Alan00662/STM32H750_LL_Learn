@@ -2478,6 +2478,31 @@
               <FileType>1</FileType>
               <FilePath>..\BSP\driver_system_clock.c</FilePath>
             </File>
+            <File>
+              <FileName>board.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSP\board.c</FilePath>
+            </File>
+            <File>
+              <FileName>driver_backlight.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSP\driver_backlight.c</FilePath>
+            </File>
+            <File>
+              <FileName>driver_key.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSP\driver_key.c</FilePath>
+            </File>
+            <File>
+              <FileName>driver_lcd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSP\driver_lcd.c</FilePath>
+            </File>
+            <File>
+              <FileName>driver_tca9539.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSP\driver_tca9539.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
