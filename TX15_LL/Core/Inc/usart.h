@@ -44,26 +44,7 @@ void MX_USART3_UART_Init(void);
 void MX_USART6_UART_Init(void);
 
 /* USER CODE BEGIN Prototypes */
-void uart1_send_string(char *str);
-void uart1_send_buf(uint8_t *buf, uint8_t len);
-void debug_tx1(char *fmt, ...);
-void uart2_send_string(char *str);
-void uart2_send_buf(uint8_t *buf, uint8_t len);
-void debug_tx2(char *fmt, ...);
-void uart3_send_string(char *str);
-void uart3_send_buf(uint8_t *buf, uint8_t len);
-void debug_tx3(char *fmt, ...);
-void uart4_send_string(char *str);
-void uart4_send_buf(uint8_t *buf, uint8_t len);
-void debug_tx4(char *fmt, ...);
-void uart5_send_a_byte(uint8_t Data);
-void uart5_send_string(char *str);
-void uart5_send_buf(uint8_t *buf, uint8_t len);
-void debug_tx5(char *fmt, ...);
-void uart6_send_byte(uint8_t Data);
-void uart6_send_string(char *str);
-void uart6_send_buf(uint8_t *buf, uint8_t len);
-void debug_tx6(char *fmt, ...);
+
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus

@@ -137,7 +137,7 @@
   */
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32h7x_hal.h"
+#include "stm32h7xx_hal.h"
 
 /** @addtogroup STM32H7xx_HAL_Driver
   * @{
