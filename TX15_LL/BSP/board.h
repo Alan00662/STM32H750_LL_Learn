@@ -4,7 +4,7 @@
 #include "main.h"
 
 #include "driver_led.h"
-
+void boardInit(void);
 #endif
 
 

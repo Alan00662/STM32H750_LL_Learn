@@ -28,37 +28,19 @@
 #include "gpio.h"
 #include "fmc.h"
 
-
+#include "board.h"
 #include "driver_led.h"
-#include "driver_system_clock.h"
+
 
 void MX_FREERTOS_Init(void);
 
 int main(void)
 {
 
-  MPU_Config();
 
-  HAL_Init();
 
-  SystemClock_Config();
 
-  PeriphCommonClock_Config();
-
-  MX_GPIO_Init();
-  MX_UART4_Init();
-  MX_UART5_Init();
-  MX_USART1_UART_Init();
-  MX_USART2_UART_Init();
-  MX_USART3_UART_Init();
-  MX_USART6_UART_Init();
-  MX_LTDC_Init();
-  MX_DMA2D_Init();
-  MX_I2C4_Init();
-  MX_ADC1_Init();
-  MX_ADC3_Init();
-  MX_FMC_Init();
-
+	boardInit();
   osKernelInitialize();
 
   MX_FREERTOS_Init();
