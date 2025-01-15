@@ -37,9 +37,6 @@ void MX_FREERTOS_Init(void);
 int main(void)
 {
 
-
-
-
 	boardInit();
   osKernelInitialize();
 

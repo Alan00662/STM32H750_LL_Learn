@@ -37,11 +37,25 @@ const osThreadAttr_t LedTask_attributes = {
   .priority = (osPriority_t) osPriorityLow,
 };
 
+osThreadId_t KeysTaskHandle;
+const osThreadAttr_t KeysTask_attributes = {
+  .name = "KeysTask",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityLow,
+};
 
+/* Definitions for LedTask */
+osThreadId_t LcdMenuHandle;
+const osThreadAttr_t LcdMenu_attributes = {
+  .name = "LcdMenu",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityLow,
+};
 
 void StartDefaultTask(void *argument);
 void led_task(void *argument);
-
+void keys_task(void *argument);
+void lcd_menu_task(void *argument);
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
 /**
@@ -52,13 +66,11 @@ void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 void MX_FREERTOS_Init(void) {
 
 
-  /* Create the thread(s) */
-  /* creation of defaultTask */
   defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
 
-  /* creation of LedTask */
   LedTaskHandle = osThreadNew(led_task, NULL, &LedTask_attributes);
-
+  LcdMenuHandle = osThreadNew(lcd_menu_task, NULL, &LcdMenu_attributes);
+	KeysTaskHandle = osThreadNew(keys_task, NULL, &KeysTask_attributes);
 
 }
 
@@ -77,28 +89,28 @@ void StartDefaultTask(void *argument)
 
 void led_task(void *argument)
 {
-	static uint8_t bink_flg = 0;
+	static uint8_t bink_num = 0;
 	for(;;)
   { 
-		switch(bink_flg)
+		switch(bink_num)
 		{
 			case 0:
 				LED0(1);
 				LED1(0);
 				LED2(0);
-				bink_flg ++;
+				bink_num ++;
 				break;
 			case 1:
 				LED0(0);
 				LED1(1);
 				LED2(0);
-				bink_flg ++;
+				bink_num ++;
 				break;
 			case 2:
 				LED0(0);
 				LED1(0);
 				LED2(1);
-				bink_flg =0;
+				bink_num =0;
 				break;
 		}
     osDelay(300);
@@ -106,5 +118,21 @@ void led_task(void *argument)
 
 }
 
+void keys_task(void *argument)
+{
+	for(;;)
+	{
+		
+	}
+}
+
+
+void lcd_menu_task(void *argument)
+{
+	for(;;)
+	{
+		
+	}
+}
 
 
