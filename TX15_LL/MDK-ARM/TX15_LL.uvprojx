@@ -862,6 +862,11 @@
                 </FileArmAds>
               </FileOption>
             </File>
+            <File>
+              <FileName>quadspi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\quadspi.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2459,6 +2464,11 @@
                   </Cads>
                 </FileArmAds>
               </FileOption>
+            </File>
+            <File>
+              <FileName>stm32h7xx_hal_qspi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_qspi.c</FilePath>
             </File>
           </Files>
         </Group>

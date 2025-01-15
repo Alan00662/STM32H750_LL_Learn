@@ -24,6 +24,7 @@
 #include "i2c.h"
 #include "ltdc.h"
 #include "memorymap.h"
+#include "quadspi.h"
 #include "usart.h"
 #include "gpio.h"
 #include "fmc.h"
@@ -121,6 +122,7 @@ int main(void)
   MX_ADC1_Init();
   MX_ADC3_Init();
   MX_FMC_Init();
+  MX_QUADSPI_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
