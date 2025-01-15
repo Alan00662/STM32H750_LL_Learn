@@ -34,6 +34,6 @@
 
 #define LCD_READ_DATA_PIN()           LL_GPIO_IsInputPinSet(LCD_SPI_GPIO, LCD_SPI_MOSI_GPIO_PIN)
 
-
+void lcdInit(void);
 #endif
 

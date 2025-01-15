@@ -72,30 +72,16 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define ENTER_Pin LL_GPIO_PIN_12
-#define ENTER_GPIO_Port GPIOG
-#define MDL_Pin LL_GPIO_PIN_3
-#define MDL_GPIO_Port GPIOE
+
 #define LED0_Pin LL_GPIO_PIN_8
 #define LED0_GPIO_Port GPIOI
-#define PAGE_R_Pin LL_GPIO_PIN_8
-#define PAGE_R_GPIO_Port GPIOA
+
 #define LED1_Pin LL_GPIO_PIN_10
 #define LED1_GPIO_Port GPIOI
 #define LED2_Pin LL_GPIO_PIN_11
 #define LED2_GPIO_Port GPIOI
-#define PAGE_L_Pin LL_GPIO_PIN_7
-#define PAGE_L_GPIO_Port GPIOG
-#define RTN_Pin LL_GPIO_PIN_3
-#define RTN_GPIO_Port GPIOG
-#define TELE_Pin LL_GPIO_PIN_2
-#define TELE_GPIO_Port GPIOG
-#define SYS_Pin LL_GPIO_PIN_2
-#define SYS_GPIO_Port GPIOB
-#define PWR_Pin LL_GPIO_PIN_12
-#define PWR_GPIO_Port GPIOH
-#define PWR_KEY_Pin LL_GPIO_PIN_4
-#define PWR_KEY_GPIO_Port GPIOA
+
+
 
 /* USER CODE BEGIN Private defines */
 uint32_t millis(void);

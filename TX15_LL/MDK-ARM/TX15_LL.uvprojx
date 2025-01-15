@@ -2528,6 +2528,11 @@
               <FileType>1</FileType>
               <FilePath>..\BSP\driver_extflash.c</FilePath>
             </File>
+            <File>
+              <FileName>driver_pwr.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSP\driver_pwr.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

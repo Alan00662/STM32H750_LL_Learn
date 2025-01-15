@@ -3,7 +3,7 @@
 
 #include "main.h"
 
-
+void keysInit(void);
 
 #endif
 

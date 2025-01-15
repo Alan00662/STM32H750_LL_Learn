@@ -3,7 +3,9 @@
 
 #include "main.h"
 
+void backlightEnable(uint8_t dutyCycle);
 
+#define lcdOff()              backlightEnable(0) /* just disable the backlight */
 
 #endif
 

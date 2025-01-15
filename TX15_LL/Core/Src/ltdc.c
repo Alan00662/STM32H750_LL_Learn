@@ -19,9 +19,13 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "ltdc.h"
-
+#include "hal.h"
+#include "driver_lcd.h"
 /* USER CODE BEGIN 0 */
-
+uint8_t TouchControllerType = 0;  // 0: other; 1: CST836U
+static volatile uint16_t lcd_phys_w = LCD_PHYS_W;
+static volatile uint16_t lcd_phys_h = LCD_PHYS_H;
+void* initialFrameBuffer = NULL;
 /* USER CODE END 0 */
 
 LTDC_HandleTypeDef hltdc;
@@ -44,14 +48,14 @@ void MX_LTDC_Init(void)
   hltdc.Init.VSPolarity = LTDC_VSPOLARITY_AL;
   hltdc.Init.DEPolarity = LTDC_DEPOLARITY_AL;
   hltdc.Init.PCPolarity = LTDC_PCPOLARITY_IPC;
-  hltdc.Init.HorizontalSync = 5;
-  hltdc.Init.VerticalSync = 1;
-  hltdc.Init.AccumulatedHBP = 25;
-  hltdc.Init.AccumulatedVBP = 11;
-  hltdc.Init.AccumulatedActiveW = 345;
-  hltdc.Init.AccumulatedActiveH = 491;
-  hltdc.Init.TotalWidth = 385;
-  hltdc.Init.TotalHeigh = 501;
+  hltdc.Init.HorizontalSync = HSW-1;
+  hltdc.Init.VerticalSync = VSH-1;
+  hltdc.Init.AccumulatedHBP = HSW+HBP-1;
+  hltdc.Init.AccumulatedVBP = VSH+VBP-1;
+	hltdc.Init.AccumulatedActiveW = lcd_phys_w + HBP+HSW-1;
+  hltdc.Init.AccumulatedActiveH = lcd_phys_h + VBP+VSH-1;
+  hltdc.Init.TotalWidth = lcd_phys_w + HBP + HFP + HSW -1;
+	hltdc.Init.TotalHeigh = lcd_phys_h + VBP + VFP+VSH-1;
   hltdc.Init.Backcolor.Blue = 0;
   hltdc.Init.Backcolor.Green = 0;
   hltdc.Init.Backcolor.Red = 0;
@@ -60,17 +64,17 @@ void MX_LTDC_Init(void)
     Error_Handler();
   }
   pLayerCfg.WindowX0 = 0;
-  pLayerCfg.WindowX1 = 320;
+  pLayerCfg.WindowX1 = lcd_phys_w;
   pLayerCfg.WindowY0 = 0;
-  pLayerCfg.WindowY1 = 480;
+  pLayerCfg.WindowY1 = lcd_phys_h;
   pLayerCfg.PixelFormat = LTDC_PIXEL_FORMAT_RGB565;
   pLayerCfg.Alpha = 255;
   pLayerCfg.Alpha0 = 0;
   pLayerCfg.BlendingFactor1 = LTDC_BLENDING_FACTOR1_CA;
   pLayerCfg.BlendingFactor2 = LTDC_BLENDING_FACTOR2_CA;
-  pLayerCfg.FBStartAdress = 0;
-  pLayerCfg.ImageWidth = 0;
-  pLayerCfg.ImageHeight = 0;
+  pLayerCfg.FBStartAdress = (intptr_t)initialFrameBuffer;;
+  pLayerCfg.ImageWidth = lcd_phys_w;
+  pLayerCfg.ImageHeight = lcd_phys_h;
   pLayerCfg.Backcolor.Blue = 0;
   pLayerCfg.Backcolor.Green = 0;
   pLayerCfg.Backcolor.Red = 0;
@@ -148,10 +152,15 @@ void HAL_LTDC_MspInit(LTDC_HandleTypeDef* ltdcHandle)
     HAL_GPIO_Init(GPIOI, &GPIO_InitStruct);
 
     /* LTDC interrupt Init */
-    HAL_NVIC_SetPriority(LTDC_IRQn, 5, 0);
-    HAL_NVIC_EnableIRQ(LTDC_IRQn);
+//    HAL_NVIC_SetPriority(LTDC_IRQn, 5, 0);
+//    HAL_NVIC_EnableIRQ(LTDC_IRQn);
   /* USER CODE BEGIN LTDC_MspInit 1 */
-
+	NVIC_SetPriority(LTDC_IRQn, LTDC_IRQ_PRIO);
+	NVIC_EnableIRQ(LTDC_IRQn);
+	
+	// Trigger on last line
+	HAL_LTDC_ProgramLineEvent(&hltdc, lcd_phys_h);
+	__HAL_LTDC_ENABLE_IT(&hltdc, LTDC_IT_LI);
   /* USER CODE END LTDC_MspInit 1 */
   }
 }

@@ -10,7 +10,11 @@
 #include "gpio.h"
 #include "fmc.h"
 
-
+#include "driver_extflash.h"
+#include "driver_lcd.h"
+#include "driver_key.h"
+#include "driver_pwr.h"
+#include "driver_backlight.h"
 void boardInit(void)
 {
 	MPU_Config();
@@ -24,11 +28,26 @@ void boardInit(void)
   MX_USART2_UART_Init();
   MX_USART3_UART_Init();
   MX_USART6_UART_Init();
-  MX_LTDC_Init();
+
   MX_DMA2D_Init();
   MX_I2C4_Init();
   MX_ADC1_Init();
   MX_ADC3_Init();
   MX_FMC_Init();
 	debug_tx5("init ok\n");
+	extflash_test();
+	lcdInit();
+	keysInit();
+}
+
+void boardOff()
+{
+  lcdOff();
+
+  while (pwrPressed()) {
+//    WDG_RESET();
+  }
+
+  SysTick->CTRL = 0; // turn off systick
+	  pwrOff();
 }

@@ -1,6 +1,7 @@
 
 #include "driver_lcd.h"
 #include "hal.h"
+#include "ltdc.h"
 
 #define lcdDelay() 			LL_mDelay(1);
 
@@ -49,7 +50,7 @@ static void lcdReset(void)
   LL_mDelay(100);
 }
 
-uint8_t LCD_ReadByteOnFallingEdge(void) 
+static uint8_t LCD_ReadByteOnFallingEdge(void) 
 {
   uint16_t i;
   uint8_t ReceiveData = 0;
@@ -111,7 +112,7 @@ static void lcdWriteByte(uint8_t data_enable, uint8_t byte)
   LCD_SCK_LOW();
 }
 
-uint8_t LCD_ReadByte(void) 
+static uint8_t LCD_ReadByte(void) 
 {
   uint16_t i;
   uint8_t ReceiveData = 0;
@@ -133,7 +134,7 @@ uint8_t LCD_ReadByte(void)
   return (ReceiveData);
 }
 
-uint8_t LCD_ReadRegister(unsigned char Register) 
+static uint8_t LCD_ReadRegister(unsigned char Register) 
 {
   uint8_t ReadData = 0;
   LCD_CS_LOW();
@@ -152,7 +153,7 @@ void lcdWriteCommand(uint8_t command)
   lcdWriteByte(0, command);
 }
 
-void lcdWriteData(uint8_t data) 
+static void lcdWriteData(uint8_t data) 
 {
   lcdWriteByte(1, data);
 }
@@ -164,7 +165,8 @@ void LCD_ST7365_On(void) {
   LCD_CS_HIGH();
 }
 
-void LCD_ST7365_Init(void) {
+static void LCD_ST7365_Init(void) 
+{
 
   LCD_CS_LOW();
   LL_mDelay(1);
@@ -294,4 +296,18 @@ void LCD_ST7365_Off(void)
   LL_mDelay(1);
   lcdWriteCommand(0x28);
   LCD_CS_HIGH();
+}
+
+void lcdSetInitalFrameBuffer(void* fbAddress)
+{
+  initialFrameBuffer = fbAddress;
+};
+
+void lcdInit(void)
+{
+	lcdSpiConfig();
+	lcdReset();
+	LCD_ST7365_Init();
+	MX_LTDC_Init();
+
 }
