@@ -2523,6 +2523,11 @@
               <FileType>1</FileType>
               <FilePath>..\BSP\driver_sdram.c</FilePath>
             </File>
+            <File>
+              <FileName>driver_extflash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSP\driver_extflash.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

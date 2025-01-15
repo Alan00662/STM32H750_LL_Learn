@@ -21,7 +21,10 @@
 #include "usart.h"
 
 /* USER CODE BEGIN 0 */
-
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "stdarg.h"
 /* USER CODE END 0 */
 
 /* UART4 init function */
@@ -402,5 +405,241 @@ void MX_USART6_UART_Init(void)
 }
 
 /* USER CODE BEGIN 1 */
+void uart1_send_byte(uint8_t Data)
+{
+    while (LL_USART_IsActiveFlag_TC(USART1) != 1)
+        ; // wait;
+    LL_USART_TransmitData8(USART1, Data);
 
+}
+
+void uart1_send_buf(uint8_t *buf, uint8_t len)
+{
+    uint8_t i;
+    for (i = 0; i < len; i++)
+    {
+        uart1_send_byte(*(buf + i));
+    }
+}
+
+void uart1_send_string(char *str)
+{
+    uint8_t i;
+    for (i = 0; i < strlen(str); i++)
+    {
+        uart1_send_byte(*(str + i));
+    }
+}
+
+
+void debug_tx1(char *fmt, ...)
+{
+    int len;
+    char buf[200];
+
+    va_list arguments;
+
+    va_start(arguments, fmt);
+    len = vsnprintf(buf, sizeof(buf) - 1, fmt, arguments);
+    va_end(arguments);
+    uart1_send_string(buf);
+}
+
+void uart2_send_byte(uint8_t Data)
+{
+    while (LL_USART_IsActiveFlag_TC(USART2) != 1)
+        ; // wait;
+    LL_USART_TransmitData8(USART2, Data);
+
+
+}
+
+void uart2_send_buf(uint8_t *buf, uint8_t len)
+{
+    uint8_t i;
+    for (i = 0; i < len; i++)
+    {
+        uart1_send_byte(*(buf + i));
+    }
+}
+
+void uart2_send_string(char *str)
+{
+    uint8_t i;
+    for (i = 0; i < strlen(str); i++)
+    {
+        uart2_send_byte(*(str + i));
+    }
+}
+
+
+void debug_tx2(char *fmt, ...)
+{
+    int len;
+    char buf[200];
+
+    va_list arguments;
+
+    va_start(arguments, fmt);
+    len = vsnprintf(buf, sizeof(buf) - 1, fmt, arguments);
+    va_end(arguments);
+    uart2_send_string(buf);
+}
+
+void uart3_send_byte(uint8_t Data)
+{
+    while (LL_USART_IsActiveFlag_TC(USART3) != 1)
+        ; // wait;
+    LL_USART_TransmitData8(USART3, Data);
+
+}
+
+void uart3_send_buf(uint8_t *buf, uint8_t len)
+{
+    uint8_t i;
+    for (i = 0; i < len; i++)
+    {
+        uart3_send_byte(*(buf + i));
+    }
+}
+
+void uart3_send_string(char *str)
+{
+    uint8_t i;
+    for (i = 0; i < strlen(str); i++)
+    {
+        uart3_send_byte(*(str + i));
+    }
+}
+
+void debug_tx3(char *fmt, ...)
+{
+    int len;
+    char buf[200];
+
+    va_list arguments;
+
+    va_start(arguments, fmt);
+    len = vsnprintf(buf, sizeof(buf) - 1, fmt, arguments);
+    va_end(arguments);
+    uart3_send_string(buf);
+}
+
+/* USER CODE BEGIN 1 */
+void uart4_send_a_byte(uint8_t Data)
+{
+    while (LL_USART_IsActiveFlag_TC(UART4) != 1)
+        ; // wait;
+    LL_USART_TransmitData8(UART4, Data);
+
+}
+
+void uart4_send_buf(uint8_t *buf, uint8_t len)
+{
+    uint8_t i;
+    for (i = 0; i < len; i++)
+    {
+        uart4_send_a_byte(*(buf + i));
+    }
+}
+
+void uart4_send_string(char *str)
+{
+    uint8_t i;
+    for (i = 0; i < strlen(str); i++)
+    {
+        uart4_send_a_byte(*(str + i));
+    }
+}
+
+void debug_tx4(char *fmt, ...)
+{
+    int len;
+    char buf[200];
+
+    va_list arguments;
+
+    va_start(arguments, fmt);
+    len = vsnprintf(buf, sizeof(buf) - 1, fmt, arguments);
+    va_end(arguments);
+    uart4_send_string(buf);
+}
+
+void uart5_send_a_byte(uint8_t Data)
+{
+    while (LL_USART_IsActiveFlag_TC(UART5) != 1)
+        ; // wait;
+    LL_USART_TransmitData8(UART5, Data);
+
+}
+
+void uart5_send_buf(uint8_t *buf, uint8_t len)
+{
+    uint8_t i;
+    for (i = 0; i < len; i++)
+    {
+        uart5_send_a_byte(*(buf + i));
+    }
+}
+
+void uart5_send_string(char *str)
+{
+    uint8_t i;
+    for (i = 0; i < strlen(str); i++)
+    {
+        uart5_send_a_byte(*(str + i));
+    }
+}
+
+void debug_tx5(char *fmt, ...)
+{
+    int len;
+    char buf[200];
+
+    va_list arguments;
+
+    va_start(arguments, fmt);
+    len = vsnprintf(buf, sizeof(buf) - 1, fmt, arguments);
+    va_end(arguments);
+    uart5_send_string(buf);
+}
+
+void uart6_send_byte(uint8_t Data)
+{
+    while (LL_USART_IsActiveFlag_TC(USART6) != 1)
+        ; // wait;
+    LL_USART_TransmitData8(USART6, Data);
+
+}
+
+void uart6_send_buf(uint8_t *buf, uint8_t len)
+{
+    uint8_t i;
+    for (i = 0; i < len; i++)
+    {
+        uart6_send_byte(*(buf + i));
+    }
+}
+
+void uart6_send_string(char *str)
+{
+    uint8_t i;
+    for (i = 0; i < strlen(str); i++)
+    {
+        uart6_send_byte(*(str + i));
+    }
+}
+
+void debug_tx6(char *fmt, ...)
+{
+    int len;
+    char buf[200];
+
+    va_list arguments;
+
+    va_start(arguments, fmt);
+    len = vsnprintf(buf, sizeof(buf) - 1, fmt, arguments);
+    va_end(arguments);
+    uart6_send_string(buf);
+}
 /* USER CODE END 1 */

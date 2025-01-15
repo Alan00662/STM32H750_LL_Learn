@@ -30,4 +30,5 @@ void boardInit(void)
   MX_ADC1_Init();
   MX_ADC3_Init();
   MX_FMC_Init();
+	debug_tx5("init ok\n");
 }
