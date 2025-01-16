@@ -70,6 +70,51 @@
 
 #define ADC_VREF_PREC2                  330
 
+// Haptic: TIM3_CH2
+#define HAPTIC_PWM
+#define HAPTIC_GPIO                     GPIO_PIN(GPIOC, 7)
+#define HAPTIC_GPIO_TIMER               TIM3
+#define HAPTIC_GPIO_AF                  GPIO_AF2
+#define HAPTIC_TIMER_OUTPUT_ENABLE      TIM_CCER_CC2E | TIM_CCER_CC2NE;
+#define HAPTIC_TIMER_MODE               TIM_CCMR1_OC2M_1 | TIM_CCMR1_OC2M_2 | TIM_CCMR1_OC2PE
+#define HAPTIC_TIMER_COMPARE_VALUE      HAPTIC_GPIO_TIMER->CCR2
+
+// Flysky Hall Stick
+#define FLYSKY_HALL_SERIAL_USART                 UART4
+
+#define FLYSKY_HALL_SERIAL_TX_GPIO               GPIO_PIN(GPIOB, 9)
+#define FLYSKY_HALL_SERIAL_RX_GPIO               GPIO_PIN(GPIOB, 8)
+#define FLYSKY_HALL_SERIAL_USART_IRQn            UART4_IRQn
+
+#define FLYSKY_HALL_SERIAL_DMA                   DMA1
+#define FLYSKY_HALL_DMA_Stream_RX                LL_DMA_STREAM_2
+#define FLYSKY_HALL_DMA_Channel                  LL_DMAMUX1_REQ_UART4_RX
+
+// LED Strip
+#define LED_STRIP_LENGTH                  6
+#define LED_STRIP_GPIO                    GPIOA
+#define LED_STRIP_GPIO_PIN                LL_GPIO_PIN_0 // PA.00 / TIM2_CH1
+#define LED_STRIP_GPIO_AF                 LL_GPIO_AF_1         // TIM1/2/16/17
+#define LED_STRIP_TIMER                   TIM2
+#define LED_STRIP_TIMER_FREQ              (PERI1_FREQUENCY * TIMER_MULT_APB1)
+#define LED_STRIP_TIMER_CHANNEL           LL_TIM_CHANNEL_CH1
+#define LED_STRIP_TIMER_DMA               DMA1
+#define LED_STRIP_TIMER_DMA_CHANNEL       LL_DMAMUX1_REQ_TIM2_UP
+#define LED_STRIP_TIMER_DMA_STREAM        LL_DMA_STREAM_0
+#define LED_STRIP_TIMER_DMA_IRQn          DMA1_Stream0_IRQn
+#define LED_STRIP_TIMER_DMA_IRQHandler    DMA1_Stream0_IRQHandler
+#define LED_STRIP_REFRESH_PERIOD          50 //ms
+
+#define STATUS_LEDS
+#define GPIO_LED_GPIO_ON                  LL_GPIO_SetOutputPin
+#define GPIO_LED_GPIO_OFF                 LL_GPIO_ResetOutputPin
+#define LED_RED_GPIO_PIN 									LL_GPIO_PIN_8
+#define LED_RED_GPIO 											GPIOI
+#define LED_BLUE_GPIO_PIN 								LL_GPIO_PIN_10
+#define LED_BLUE_GPIO 										GPIOI
+#define LED_GREEN_GPIO_PIN 								LL_GPIO_PIN_11
+#define LED_GREEN_GPIO 										GPIOI
+
 // Power
 #define PWR_SWITCH_GPIO            			GPIOA
 #define PWR_SWITCH_GPIO_PIN             LL_GPIO_PIN_4

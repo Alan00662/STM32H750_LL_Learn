@@ -1,69 +1,49 @@
 
 #include "driver_led.h"
 
+#include "hal.h"
 
-uint32_t led0_bink_tick = 0;
-void led0_bink(uint16_t ms)
+void ledInit(void)
 {
-	if((millis() - led0_bink_tick) > ms)
-	{
-		LL_GPIO_TogglePin(LED1_GPIO_Port, LED0_Pin);
-		led0_bink_tick =  millis();
-	}
+	LL_GPIO_InitTypeDef GPIO_InitStruct = {0};
+	LL_AHB4_GRP1_EnableClock(LL_AHB4_GRP1_PERIPH_GPIOI);
+		  /**/
+  LL_GPIO_ResetOutputPin(GPIOI, LED_RED_GPIO_PIN|LED_BLUE_GPIO_PIN|LED_GREEN_GPIO_PIN);
+	GPIO_InitStruct.Pin = LED_RED_GPIO_PIN|LED_BLUE_GPIO_PIN|LED_GREEN_GPIO_PIN;
+  GPIO_InitStruct.Mode = LL_GPIO_MODE_OUTPUT;
+  GPIO_InitStruct.Speed = LL_GPIO_SPEED_FREQ_LOW;
+  GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
+  GPIO_InitStruct.Pull = LL_GPIO_PULL_NO;
+  LL_GPIO_Init(GPIOI, &GPIO_InitStruct);
+	
+}
 
-}	
-
-uint32_t led1_bink_tick = 0;
-void led1_bink(uint16_t ms)
+void ledOff(void)
 {
-	if((millis() - led1_bink_tick) > ms)
-	{
-		LL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
-		led1_bink_tick =  millis();
-	}
 
-}	
+  GPIO_LED_GPIO_OFF(LED_RED_GPIO,LED_RED_GPIO_PIN);
 
-uint32_t led2_bink_tick = 0;
-void led2_bink(uint16_t ms)
+
+  GPIO_LED_GPIO_OFF(LED_BLUE_GPIO,LED_BLUE_GPIO_PIN);
+
+
+  GPIO_LED_GPIO_OFF(LED_GREEN_GPIO,LED_GREEN_GPIO_PIN);
+
+}
+
+void ledRed(void)
 {
-	if((millis() - led2_bink_tick) > ms)
-	{
-		LL_GPIO_TogglePin(LED1_GPIO_Port, LED2_Pin);
-		led2_bink_tick =  millis();
-	}
+  GPIO_LED_GPIO_ON(LED_RED_GPIO,LED_RED_GPIO_PIN);
+}
 
-}	
-
-uint32_t led_Loop_bink_tick = 0;
-void led_Loop_bink(uint16_t ms)
+void ledGreen(void)
 {
-	static uint8_t bink_flg = 0;
-	if((millis() - led_Loop_bink_tick) > ms)
-	{
-		switch(bink_flg)
-		{
-			case 0:
-				LED0(1);
-				LED1(0);
-				LED2(0);
-				bink_flg =1;
-				break;
-			case 1:
-				LED0(0);
-				LED1(1);
-				LED2(0);
-				bink_flg =2;
-				break;
-			case 2:
-				LED0(0);
-				LED1(0);
-				LED2(1);
-				bink_flg =0;
-				break;
-		}
-							
-		led_Loop_bink_tick =  millis();
-	}
+  GPIO_LED_GPIO_ON(LED_GREEN_GPIO,LED_GREEN_GPIO_PIN);
 
-}	
+}
+
+void ledBlue(void)
+{
+  GPIO_LED_GPIO_ON(LED_BLUE_GPIO,LED_BLUE_GPIO_PIN);
+
+}

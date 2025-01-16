@@ -74,13 +74,13 @@ void Error_Handler(void);
 
 /* Private defines -----------------------------------------------------------*/
 
-#define LED0_Pin LL_GPIO_PIN_8
-#define LED0_GPIO_Port GPIOI
+//#define LED0_Pin LL_GPIO_PIN_8
+//#define LED0_GPIO_Port GPIOI
 
-#define LED1_Pin LL_GPIO_PIN_10
-#define LED1_GPIO_Port GPIOI
-#define LED2_Pin LL_GPIO_PIN_11
-#define LED2_GPIO_Port GPIOI
+//#define LED1_Pin LL_GPIO_PIN_10
+//#define LED1_GPIO_Port GPIOI
+//#define LED2_Pin LL_GPIO_PIN_11
+//#define LED2_GPIO_Port GPIOI
 
 
 

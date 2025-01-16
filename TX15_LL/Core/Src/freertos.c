@@ -95,21 +95,21 @@ void led_task(void *argument)
 		switch(bink_num)
 		{
 			case 0:
-				LED0(1);
-				LED1(0);
-				LED2(0);
+				GPIO_LED_GPIO_ON(LED_RED_GPIO,LED_RED_GPIO_PIN);
+				GPIO_LED_GPIO_OFF(LED_BLUE_GPIO,LED_BLUE_GPIO_PIN);
+				GPIO_LED_GPIO_OFF(LED_GREEN_GPIO,LED_GREEN_GPIO_PIN);
 				bink_num ++;
 				break;
 			case 1:
-				LED0(0);
-				LED1(1);
-				LED2(0);
+				GPIO_LED_GPIO_OFF(LED_RED_GPIO,LED_RED_GPIO_PIN);
+				GPIO_LED_GPIO_ON(LED_BLUE_GPIO,LED_BLUE_GPIO_PIN);
+				GPIO_LED_GPIO_OFF(LED_GREEN_GPIO,LED_GREEN_GPIO_PIN);
 				bink_num ++;
 				break;
 			case 2:
-				LED0(0);
-				LED1(0);
-				LED2(1);
+				GPIO_LED_GPIO_OFF(LED_RED_GPIO,LED_RED_GPIO_PIN);
+				GPIO_LED_GPIO_OFF(LED_BLUE_GPIO,LED_BLUE_GPIO_PIN);
+				GPIO_LED_GPIO_ON(LED_GREEN_GPIO,LED_GREEN_GPIO_PIN);
 				bink_num =0;
 				break;
 		}

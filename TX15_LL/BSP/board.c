@@ -10,11 +10,7 @@
 #include "gpio.h"
 #include "fmc.h"
 
-#include "driver_extflash.h"
-#include "driver_lcd.h"
-#include "driver_key.h"
-#include "driver_pwr.h"
-#include "driver_backlight.h"
+
 void boardInit(void)
 {
 	MPU_Config();
@@ -41,6 +37,7 @@ void boardInit(void)
 	extflash_test();
 	lcdInit();
 	keysInit();
+	ledInit();
 }
 
 void boardOff()
@@ -52,5 +49,8 @@ void boardOff()
   }
 
   SysTick->CTRL = 0; // turn off systick
-	  pwrOff();
+	
+	  // Shutdown the Haptic
+  hapticDone();
+	pwrOff();
 }

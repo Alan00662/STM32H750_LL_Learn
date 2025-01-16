@@ -2,8 +2,7 @@
 #include "driver_lcd.h"
 #include "hal.h"
 #include "ltdc.h"
-
-#define lcdDelay() 			LL_mDelay(1);
+#include "driver_delays.h"
 
 static void LCD_Delay(void) 
 {
@@ -36,18 +35,21 @@ static void lcdSpiConfig(void)
 }
 
 
-static void lcdReset(void) 
-{
+void lcdDelay() {
+  delay_01us(1);
+}
+
+static void lcdReset() {
   LCD_CS_HIGH();
 
   LCD_NRST_HIGH();
-  LL_mDelay(1);
+  delay_ms(1);
 
   LCD_NRST_LOW(); // RESET();
-  LL_mDelay(10);
+  delay_ms(10);
 
   LCD_NRST_HIGH();
-  LL_mDelay(100);
+  delay_ms(100);
 }
 
 static uint8_t LCD_ReadByteOnFallingEdge(void) 
@@ -160,18 +162,17 @@ static void lcdWriteData(uint8_t data)
 
 void LCD_ST7365_On(void) {
   LCD_CS_LOW();
-  LL_mDelay(1);
+  delay_ms(1);
   lcdWriteCommand(0x29);
   LCD_CS_HIGH();
 }
 
-static void LCD_ST7365_Init(void) 
-{
+void LCD_ST7365_Init(void) {
 
   LCD_CS_LOW();
-  LL_mDelay(1);
+  delay_ms(1);
   lcdWriteCommand( 0x11 );
-  LL_mDelay(120);
+  delay_ms(120);
 
   lcdWriteCommand( 0xF0 );
   lcdWriteData( 0xC3 );
@@ -182,7 +183,7 @@ static void LCD_ST7365_Init(void)
 
   lcdWriteCommand(0x11);
 
-  LL_mDelay(120);
+  delay_ms(120);
 
   lcdWriteCommand(0xF0);     // Command Set Control
   lcdWriteData(0xC3);
@@ -282,18 +283,17 @@ static void LCD_ST7365_Init(void)
   lcdWriteCommand(0xF0);
   lcdWriteData(0x69);
 
-  LL_mDelay(120);
+  delay_ms(120);
 
   lcdWriteCommand(0x21);
   LCD_CS_HIGH();
-  LL_mDelay(1);
+  delay_ms(1);
   LCD_ST7365_On();
 }
 
-void LCD_ST7365_Off(void) 
-{
+void LCD_ST7365_Off(void) {
   LCD_CS_LOW();
-  LL_mDelay(1);
+  delay_ms(1);
   lcdWriteCommand(0x28);
   LCD_CS_HIGH();
 }

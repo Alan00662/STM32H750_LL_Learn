@@ -6,6 +6,7 @@
 void backlightEnable(uint8_t dutyCycle);
 
 #define lcdOff()              backlightEnable(0) /* just disable the backlight */
-
+void lcdOn(void);
+_Bool isBacklightEnabled(void);
 #endif
 
