@@ -39,7 +39,12 @@ extern "C" {
 void MX_I2C4_Init(void);
 
 /* USER CODE BEGIN Prototypes */
+enum { I2C_Bus_1 = 0, I2C_Bus_2 };
 
+int i2c_read(uint8_t bus,uint16_t addr, uint16_t reg, uint16_t reg_size,
+             uint8_t* data, uint16_t len);
+int i2c_write(uint8_t bus,uint16_t addr, uint16_t reg, uint16_t reg_size,
+              uint8_t* data, uint16_t len);
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus

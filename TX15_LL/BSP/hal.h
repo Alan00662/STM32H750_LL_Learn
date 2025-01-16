@@ -25,6 +25,32 @@
 #define KEYS_GPIO_PIN_EXIT            LL_GPIO_PIN_3  // PG.03
 #define KEYS_GPIO_REG_TELE            GPIOG
 #define KEYS_GPIO_PIN_TELE            LL_GPIO_PIN_2  // PG.02
+// Trims
+
+// function switches
+#define FUNCTION_SWITCH_1               I2C
+#define FUNCTION_SWITCH_2               I2C
+#define FUNCTION_SWITCH_3               I2C
+#define FUNCTION_SWITCH_4               I2C
+#define FUNCTION_SWITCH_5               I2C
+#define FUNCTION_SWITCH_6               I2C
+
+// Extender Switches
+#define SWITCHES_A_3POS
+#define SWITCHES_B_3POS
+#define SWITCHES_C_3POS
+#define SWITCHES_D_3POS
+#define SWITCHES_E_3POS
+#define SWITCHES_F_3POS
+
+// Expanders
+#define IO_INT_GPIO 									GPIOD
+#define IO_INT_GPIO_PIN								LL_GPIO_PIN_3
+#define IO_RESET_GPIO									GPIOG 
+#define IO_RESET_GPIO_PIN 						LL_GPIO_PIN_10
+
+#define USE_EXTI3_IRQ
+#define EXTI3_IRQ_Priority  9
 
 // ADC
 #define ADC_GPIO_PIN_STICK_LH           LL_GPIO_PIN_6      // PA.06
@@ -140,6 +166,15 @@
 #define BACKLIGHT_GPIO_AF               GPIO_AF3
 #define BACKLIGHT_TIMER_FREQ            (PERI1_FREQUENCY * TIMER_MULT_APB1)
 
+// USB
+#define USB_GPIO                        GPIOA
+#define USB_GPIO_VBUS                   GPIOH
+#define USB_GPIO_VBUS_PIN               LL_GPIO_PIN_5
+#define USB_GPIO_DM                     GPIOA
+#define USB_GPIO_DM_PIN                 LL_GPIO_PIN_11
+#define USB_GPIO_DP                     GPIOA
+#define USB_GPIO_DP_PIN                 LL_GPIO_PIN_12
+#define USB_GPIO_AF                     GPIO_AF10
 
 //ROTARY emulation for trims as buttons
 #define ROTARY_ENCODER_NAVIGATION

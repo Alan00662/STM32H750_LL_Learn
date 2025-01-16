@@ -11,6 +11,7 @@
 #include "driver_backlight.h"
 #include "driver_haptic.h"
 #include "driver_led.h"
+#include "bsp_io.h"
 
 // Backlight driver
 #define BACKLIGHT_LEVEL_MAX             100

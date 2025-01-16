@@ -38,6 +38,7 @@ void boardInit(void)
 	lcdInit();
 	keysInit();
 	ledInit();
+	bsp_io_init();
 }
 
 void boardOff()

@@ -3,6 +3,7 @@
 #include "hal.h"
 #include "ltdc.h"
 #include "driver_delays.h"
+#include "driver_backlight.h"
 
 static void LCD_Delay(void) 
 {
@@ -305,6 +306,7 @@ void lcdSetInitalFrameBuffer(void* fbAddress)
 
 void lcdInit(void)
 {
+	lcdOn();
 	lcdSpiConfig();
 	lcdReset();
 	LCD_ST7365_Init();

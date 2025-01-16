@@ -22,9 +22,9 @@
 #include "cmsis_os.h"
 #include "board.h"
 /* Definitions for defaultTask */
-osThreadId_t defaultTaskHandle;
-const osThreadAttr_t defaultTask_attributes = {
-  .name = "defaultTask",
+osThreadId_t ExtIoTaskHandle;
+const osThreadAttr_t IoTask_attributes = {
+  .name = "ioTask",
   .stack_size = 128 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
@@ -66,7 +66,7 @@ void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 void MX_FREERTOS_Init(void) {
 
 
-  defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
+  ExtIoTaskHandle = osThreadNew(StartDefaultTask, NULL, &IoTask_attributes);
 
   LedTaskHandle = osThreadNew(led_task, NULL, &LedTask_attributes);
   LcdMenuHandle = osThreadNew(lcd_menu_task, NULL, &LcdMenu_attributes);
@@ -75,7 +75,7 @@ void MX_FREERTOS_Init(void) {
 }
 
 
-void StartDefaultTask(void *argument)
+void EXT_IO_Task(void *argument)
 {
 
   for(;;)
@@ -122,7 +122,8 @@ void keys_task(void *argument)
 {
 	for(;;)
 	{
-		
+		readKeys();
+		osDelay(10);
 	}
 }
 
