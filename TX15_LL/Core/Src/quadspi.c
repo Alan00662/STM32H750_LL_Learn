@@ -21,7 +21,7 @@
 #include "quadspi.h"
 
 /* USER CODE BEGIN 0 */
-#include "driver_extflash.h"
+
 /* USER CODE END 0 */
 
 QSPI_HandleTypeDef hqspi;
@@ -41,8 +41,7 @@ void MX_QUADSPI_Init(void)
   hqspi.Init.ClockPrescaler = 2;
   hqspi.Init.FifoThreshold = 8;
   hqspi.Init.SampleShifting = QSPI_SAMPLE_SHIFTING_NONE;
-//  hqspi.Init.FlashSize = 23;
-	hqspi.Init.FlashSize = POSITION_VAL(QSPI_FLASH_SIZE);
+  hqspi.Init.FlashSize = 23;
   hqspi.Init.ChipSelectHighTime = QSPI_CS_HIGH_TIME_1_CYCLE;
   hqspi.Init.ClockMode = QSPI_CLOCK_MODE_0;
   hqspi.Init.FlashID = QSPI_FLASH_ID_1;

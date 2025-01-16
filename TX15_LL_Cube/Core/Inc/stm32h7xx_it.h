@@ -52,9 +52,11 @@ void MemManage_Handler(void);
 void BusFault_Handler(void);
 void UsageFault_Handler(void);
 void DebugMon_Handler(void);
-void SysTick_Handler(void);
 void EXTI4_IRQHandler(void);
+void DMA1_Stream0_IRQHandler(void);
+void DMA1_Stream1_IRQHandler(void);
 void EXTI9_5_IRQHandler(void);
+void TIM1_UP_IRQHandler(void);
 void LTDC_IRQHandler(void);
 /* USER CODE BEGIN EFP */
 

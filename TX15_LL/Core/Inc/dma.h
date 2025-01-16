@@ -1,12 +1,13 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file           : main.c
-  * @brief          : Main program body
+  * @file    dma.h
+  * @brief   This file contains all the function prototypes for
+  *          the dma.c file
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2024 STMicroelectronics.
+  * Copyright (c) 2025 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -15,44 +16,37 @@
   *
   ******************************************************************************
   */
-	
 /* USER CODE END Header */
+/* Define to prevent recursive inclusion -------------------------------------*/
+#ifndef __DMA_H__
+#define __DMA_H__
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "cmsis_os.h"
-#include "adc.h"
-#include "dma2d.h"
-#include "i2c.h"
-#include "ltdc.h"
-#include "memorymap.h"
-#include "usart.h"
-#include "gpio.h"
-#include "fmc.h"
 
-#include "board.h"
-#include "driver_led.h"
+/* DMA memory to memory transfer handles -------------------------------------*/
 
+/* USER CODE BEGIN Includes */
 
-void MX_FREERTOS_Init(void);
+/* USER CODE END Includes */
 
-int main(void)
-{
-	SCB_EnableICache();		// 使能ICache
-	SCB_EnableDCache();		// 使能DCache
-	boardInit();
-  osKernelInitialize();
+/* USER CODE BEGIN Private defines */
 
-  MX_FREERTOS_Init();
+/* USER CODE END Private defines */
 
-  osKernelStart();
+void MX_DMA_Init(void);
 
-  while (1)
-  {
+/* USER CODE BEGIN Prototypes */
 
+/* USER CODE END Prototypes */
 
-  }
-
+#ifdef __cplusplus
 }
+#endif
 
-
+#endif /* __DMA_H__ */
 

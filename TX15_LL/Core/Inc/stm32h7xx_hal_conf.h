@@ -65,7 +65,7 @@
 /* #define HAL_IWDG_MODULE_ENABLED   */
 /* #define HAL_LPTIM_MODULE_ENABLED   */
 #define HAL_LTDC_MODULE_ENABLED
-/* #define HAL_XSPI_MODULE_ENABLED   */
+#define HAL_QSPI_MODULE_ENABLED
 /* #define HAL_RAMECC_MODULE_ENABLED   */
 /* #define HAL_RNG_MODULE_ENABLED   */
 /* #define HAL_RTC_MODULE_ENABLED   */
@@ -75,7 +75,7 @@
 /* #define HAL_SPDIFRX_MODULE_ENABLED   */
 /* #define HAL_SPI_MODULE_ENABLED   */
 /* #define HAL_SWPMI_MODULE_ENABLED   */
-/* #define HAL_TIM_MODULE_ENABLED   */
+#define HAL_TIM_MODULE_ENABLED
 /* #define HAL_UART_MODULE_ENABLED   */
 /* #define HAL_USART_MODULE_ENABLED   */
 /* #define HAL_IRDA_MODULE_ENABLED   */
@@ -99,7 +99,7 @@
 #define HAL_I2C_MODULE_ENABLED
 #define HAL_CORTEX_MODULE_ENABLED
 #define HAL_HSEM_MODULE_ENABLED
-#define HAL_QSPI_MODULE_ENABLED
+
 /* ########################## Oscillator Values adaptation ####################*/
 /**
   * @brief Adjust the value of External High Speed oscillator (HSE) used in your application.
