@@ -3,32 +3,19 @@
 
 #include "main.h"
 
-enum EnumKeys {
-  KEY_MENU,
+typedef enum  {
   KEY_EXIT,
   KEY_ENTER,
 
   KEY_PAGEUP,
   KEY_PAGEDN,
 
-  KEY_UP,
-  KEY_DOWN,
-
-  KEY_LEFT,
-  KEY_RIGHT,
-
-  KEY_PLUS,
-  KEY_MINUS,
-
   KEY_MODEL,
   KEY_TELE,
   KEY_SYS,
 
-  KEY_SHIFT,
-  KEY_BIND,
-
   MAX_KEYS
-};
+}EnumKeys;
 
 typedef struct key_info
 {
@@ -43,6 +30,6 @@ typedef struct key_info
 extern key_info_t Key;
 
 void keysInit(void);
-void readKeys(void);
+uint8_t readKeys(EnumKeys key);
 #endif
 

@@ -58,16 +58,8 @@ void MX_GPIO_Init(void)
   LL_AHB4_GRP1_EnableClock(LL_AHB4_GRP1_PERIPH_GPIOH);
   LL_AHB4_GRP1_EnableClock(LL_AHB4_GRP1_PERIPH_GPIOC);
 
-
-
   /**/
   LL_SYSCFG_SetEXTISource(LL_SYSCFG_EXTI_PORTI, LL_SYSCFG_EXTI_LINE4);
-
-  /**/
-  LL_SYSCFG_SetEXTISource(LL_SYSCFG_EXTI_PORTI, LL_SYSCFG_EXTI_LINE7);
-
-  /**/
-  LL_SYSCFG_SetEXTISource(LL_SYSCFG_EXTI_PORTJ, LL_SYSCFG_EXTI_LINE8);
 
   /**/
   EXTI_InitStruct.Line_0_31 = LL_EXTI_LINE_4;
@@ -79,48 +71,18 @@ void MX_GPIO_Init(void)
   LL_EXTI_Init(&EXTI_InitStruct);
 
   /**/
-  EXTI_InitStruct.Line_0_31 = LL_EXTI_LINE_7;
-  EXTI_InitStruct.Line_32_63 = LL_EXTI_LINE_NONE;
-  EXTI_InitStruct.Line_64_95 = LL_EXTI_LINE_NONE;
-  EXTI_InitStruct.LineCommand = ENABLE;
-  EXTI_InitStruct.Mode = LL_EXTI_MODE_IT;
-  EXTI_InitStruct.Trigger = LL_EXTI_TRIGGER_RISING;
-  LL_EXTI_Init(&EXTI_InitStruct);
-
-  /**/
-  EXTI_InitStruct.Line_0_31 = LL_EXTI_LINE_8;
-  EXTI_InitStruct.Line_32_63 = LL_EXTI_LINE_NONE;
-  EXTI_InitStruct.Line_64_95 = LL_EXTI_LINE_NONE;
-  EXTI_InitStruct.LineCommand = ENABLE;
-  EXTI_InitStruct.Mode = LL_EXTI_MODE_IT;
-  EXTI_InitStruct.Trigger = LL_EXTI_TRIGGER_RISING;
-  LL_EXTI_Init(&EXTI_InitStruct);
-
-  /**/
   LL_GPIO_SetPinPull(GPIOI, LL_GPIO_PIN_4, LL_GPIO_PULL_NO);
 
-  /**/
-  LL_GPIO_SetPinPull(GPIOI, LL_GPIO_PIN_7, LL_GPIO_PULL_NO);
-
-  /**/
-  LL_GPIO_SetPinPull(GPIOJ, LL_GPIO_PIN_8, LL_GPIO_PULL_NO);
 
   /**/
   LL_GPIO_SetPinMode(GPIOI, LL_GPIO_PIN_4, LL_GPIO_MODE_INPUT);
-
-  /**/
-  LL_GPIO_SetPinMode(GPIOI, LL_GPIO_PIN_7, LL_GPIO_MODE_INPUT);
-
-  /**/
-  LL_GPIO_SetPinMode(GPIOJ, LL_GPIO_PIN_8, LL_GPIO_MODE_INPUT);
 
   /**/
 
   /* EXTI interrupt init*/
   NVIC_SetPriority(EXTI4_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(),5, 0));
   NVIC_EnableIRQ(EXTI4_IRQn);
-  NVIC_SetPriority(EXTI9_5_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(),5, 0));
-  NVIC_EnableIRQ(EXTI9_5_IRQn);
+
 
 }
 

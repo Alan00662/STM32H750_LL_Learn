@@ -1,5 +1,3 @@
-
-
 #include "bsp_io.h"
 #include "hal.h"
 #include "driver_delays.h"

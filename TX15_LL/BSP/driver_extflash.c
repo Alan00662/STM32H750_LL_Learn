@@ -79,7 +79,7 @@ static int qspi_write_status_register(uint8_t reg_num, uint8_t value)
   return qspi_write(&cmd, &value, sizeof(value));
 }
 
-static int qspi_write_enable()
+static int qspi_write_enable(void)
 {
   int ret = HAL_QSPI_Command(&hqspi, (QSPI_CommandTypeDef*)&cmd_write_en,
                              HAL_QSPI_TIMEOUT_DEFAULT_VALUE);
@@ -94,7 +94,7 @@ static int qspi_write_enable()
   return ret == HAL_OK ? 0 : -1;
 }
 
-static int qspi_wait_until_ready()
+static int qspi_wait_until_ready(void)
 {
   uint8_t reg;
   int ret;
@@ -112,7 +112,7 @@ static int qspi_wait_until_ready()
   return ret;
 }
 
-static int qspi_enable_quad_io()
+static int qspi_enable_quad_io(void)
 {
   uint8_t reg;
 

@@ -39,19 +39,28 @@ void boardInit(void)
 	keysInit();
 	ledInit();
 	bsp_io_init();
+	
+	rotaryEncoderInit();
+  touchPanelInit();
+  //audioInit(&audioConfig);
+  adcInit();
 }
 
-void boardOff()
+void boardOff(void)
 {
   lcdOff();
 
-  while (pwrPressed()) {
+//  while (pwrPressed()) {
 //    WDG_RESET();
-  }
+//  }
 
   SysTick->CTRL = 0; // turn off systick
 	
 	  // Shutdown the Haptic
   hapticDone();
 	pwrOff();
+//	while(1)
+//	{
+//		
+//	}
 }

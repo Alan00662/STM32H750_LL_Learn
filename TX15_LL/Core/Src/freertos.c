@@ -52,9 +52,18 @@ const osThreadAttr_t LcdMenu_attributes = {
   .priority = (osPriority_t) osPriorityLow,
 };
 
-void StartDefaultTask(void *argument);
+/* Definitions for LedTask */
+osThreadId_t AdcTaskHandle;
+const osThreadAttr_t Adc_attributes = {
+  .name = "Adc",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityLow,
+};
+
+void EXT_IO_Task(void *argument);
 void led_task(void *argument);
 void keys_task(void *argument);
+void Adc_task(void *argument);
 void lcd_menu_task(void *argument);
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -66,11 +75,11 @@ void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 void MX_FREERTOS_Init(void) {
 
 
-  ExtIoTaskHandle = osThreadNew(StartDefaultTask, NULL, &IoTask_attributes);
-
+  ExtIoTaskHandle = osThreadNew(EXT_IO_Task, NULL, &IoTask_attributes);
   LedTaskHandle = osThreadNew(led_task, NULL, &LedTask_attributes);
   LcdMenuHandle = osThreadNew(lcd_menu_task, NULL, &LcdMenu_attributes);
 	KeysTaskHandle = osThreadNew(keys_task, NULL, &KeysTask_attributes);
+	AdcTaskHandle = osThreadNew(Adc_task, NULL, &Adc_attributes);
 
 }
 
@@ -120,10 +129,31 @@ void led_task(void *argument)
 
 void keys_task(void *argument)
 {
+	static uint8_t power_off_flg = 0;
 	for(;;)
 	{
-		readKeys();
+//		readKeys();
+		if(pwrOffPressed())
+		{
+			power_off_flg++;
+			if(power_off_flg > 100)
+			{
+				boardOff();
+			}
+		}
+		else
+		{
+			power_off_flg = 0;
+		}
 		osDelay(10);
+	}
+}
+
+void Adc_task(void *argument)
+{
+	for(;;)
+	{
+		
 	}
 }
 

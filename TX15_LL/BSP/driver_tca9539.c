@@ -27,7 +27,10 @@ int pca95xx_init(pca95xx_t* dev, uint8_t bus, uint16_t addr)
   dev->output = 0;
 	
 	MX_I2C4_Init();
+	return 0;
+
 }
+
 int pca95xx_set_direction(pca95xx_t* dev, uint16_t mask, uint16_t dir)
 {
   uint16_t tmp = dev->direction;

@@ -38,15 +38,18 @@ void keysInit(void)
 
 key_info_t Key;
 
-void readKeys(void)
+uint8_t readKeys(EnumKeys key)
 {
-	Key.sys = LL_GPIO_IsOutputPinSet(KEYS_GPIO_REG_SYS,KEYS_GPIO_PIN_SYS);
-	Key.mdl = LL_GPIO_IsOutputPinSet(KEYS_GPIO_REG_MDL,KEYS_GPIO_PIN_MDL);
-	Key.left = LL_GPIO_IsOutputPinSet(KEYS_GPIO_REG_PAGEUP,KEYS_GPIO_PIN_PAGEUP);
-	Key.right = LL_GPIO_IsOutputPinSet(KEYS_GPIO_REG_PAGEDN,KEYS_GPIO_PIN_PAGEDN);
-	Key.enter = LL_GPIO_IsOutputPinSet(KEYS_GPIO_REG_ENTER,KEYS_GPIO_PIN_ENTER);
-	Key.tele = LL_GPIO_IsOutputPinSet(KEYS_GPIO_REG_TELE,KEYS_GPIO_PIN_TELE);
-	Key.exti = LL_GPIO_IsOutputPinSet(KEYS_GPIO_REG_EXIT,KEYS_GPIO_PIN_EXIT);
+	uint8_t key_buf[MAX_KEYS]={0};
+	key_buf[KEY_EXIT]= LL_GPIO_IsOutputPinSet(KEYS_GPIO_REG_EXIT,KEYS_GPIO_PIN_EXIT);
+	key_buf[KEY_ENTER]= LL_GPIO_IsOutputPinSet(KEYS_GPIO_REG_ENTER,KEYS_GPIO_PIN_ENTER);
+	key_buf[KEY_PAGEUP]= LL_GPIO_IsOutputPinSet(KEYS_GPIO_REG_PAGEUP,KEYS_GPIO_PIN_PAGEUP);
+	key_buf[KEY_PAGEDN]= LL_GPIO_IsOutputPinSet(KEYS_GPIO_REG_PAGEDN,KEYS_GPIO_PIN_PAGEDN);
+	key_buf[KEY_MODEL]= LL_GPIO_IsOutputPinSet(KEYS_GPIO_REG_MDL,KEYS_GPIO_PIN_MDL);
+	key_buf[KEY_TELE]= LL_GPIO_IsOutputPinSet(KEYS_GPIO_REG_TELE,KEYS_GPIO_PIN_TELE);
+	key_buf[KEY_SYS]= LL_GPIO_IsOutputPinSet(KEYS_GPIO_REG_SYS,KEYS_GPIO_PIN_SYS);
+	return key_buf[key];
+	
 }
 
 enum PhysicalTrims {

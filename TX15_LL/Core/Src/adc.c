@@ -59,6 +59,27 @@ void MX_ADC1_Init(void)
   GPIO_InitStruct.Pull = LL_GPIO_PULL_NO;
   LL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
+  /* ADC1 DMA Init */
+
+  /* ADC1 Init */
+  LL_DMA_SetPeriphRequest(DMA1, LL_DMA_STREAM_2, LL_DMAMUX1_REQ_ADC1);
+
+  LL_DMA_SetDataTransferDirection(DMA1, LL_DMA_STREAM_2, LL_DMA_DIRECTION_PERIPH_TO_MEMORY);
+
+  LL_DMA_SetStreamPriorityLevel(DMA1, LL_DMA_STREAM_2, LL_DMA_PRIORITY_LOW);
+
+  LL_DMA_SetMode(DMA1, LL_DMA_STREAM_2, LL_DMA_MODE_NORMAL);
+
+  LL_DMA_SetPeriphIncMode(DMA1, LL_DMA_STREAM_2, LL_DMA_PERIPH_NOINCREMENT);
+
+  LL_DMA_SetMemoryIncMode(DMA1, LL_DMA_STREAM_2, LL_DMA_MEMORY_INCREMENT);
+
+  LL_DMA_SetPeriphSize(DMA1, LL_DMA_STREAM_2, LL_DMA_PDATAALIGN_HALFWORD);
+
+  LL_DMA_SetMemorySize(DMA1, LL_DMA_STREAM_2, LL_DMA_MDATAALIGN_HALFWORD);
+
+  LL_DMA_DisableFifoMode(DMA1, LL_DMA_STREAM_2);
+
   /* USER CODE BEGIN ADC1_Init 1 */
 
   /* USER CODE END ADC1_Init 1 */
@@ -134,6 +155,27 @@ void MX_ADC3_Init(void)
   GPIO_InitStruct.Pull = LL_GPIO_PULL_NO;
   LL_GPIO_Init(GPIOH, &GPIO_InitStruct);
 
+  /* ADC3 DMA Init */
+
+  /* ADC3 Init */
+  LL_DMA_SetPeriphRequest(DMA1, LL_DMA_STREAM_4, LL_DMAMUX1_REQ_ADC3);
+
+  LL_DMA_SetDataTransferDirection(DMA1, LL_DMA_STREAM_4, LL_DMA_DIRECTION_PERIPH_TO_MEMORY);
+
+  LL_DMA_SetStreamPriorityLevel(DMA1, LL_DMA_STREAM_4, LL_DMA_PRIORITY_LOW);
+
+  LL_DMA_SetMode(DMA1, LL_DMA_STREAM_4, LL_DMA_MODE_NORMAL);
+
+  LL_DMA_SetPeriphIncMode(DMA1, LL_DMA_STREAM_4, LL_DMA_PERIPH_NOINCREMENT);
+
+  LL_DMA_SetMemoryIncMode(DMA1, LL_DMA_STREAM_4, LL_DMA_MEMORY_INCREMENT);
+
+  LL_DMA_SetPeriphSize(DMA1, LL_DMA_STREAM_4, LL_DMA_PDATAALIGN_HALFWORD);
+
+  LL_DMA_SetMemorySize(DMA1, LL_DMA_STREAM_4, LL_DMA_MDATAALIGN_HALFWORD);
+
+  LL_DMA_DisableFifoMode(DMA1, LL_DMA_STREAM_4);
+
   /* USER CODE BEGIN ADC3_Init 1 */
 
   /* USER CODE END ADC3_Init 1 */
@@ -182,5 +224,28 @@ void MX_ADC3_Init(void)
 }
 
 /* USER CODE BEGIN 1 */
+/*设置ADC通道*/
+float ADC1_GetVolValue(uint32_t ch)
+{
+	  uint16_t ADC_Value;
+    float ADC_VolValue;
+	  LL_ADC_REG_SetSequencerRanks(ADC1,LL_ADC_REG_RANK_1,ch); //设置规则序列1，设置通道
+	  LL_ADC_REG_StartConversion(ADC1); //启动规则转换通道
+		while(!LL_ADC_IsActiveFlag_EOS(ADC1)){};//等待转换结束	
+	  ADC_Value=LL_ADC_REG_ReadConversionData12(ADC1);
+    ADC_VolValue =(float)ADC_Value/4096*3.3;
+    return ADC_VolValue;
+}
+
+/*计算平均值*/
+float ADC_GetAverage(uint8_t time)
+{
+  uint8_t i;
+	float ADC_Sum,	ADC_Average;
+	for(i=0;i<time;i++)
+	ADC_Sum=ADC_Sum+ADC1_GetVolValue(LL_ADC_CHANNEL_8);
+	ADC_Average=ADC_Sum/time;
+	return ADC_Average;
+}
 
 /* USER CODE END 1 */

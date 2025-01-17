@@ -2876,6 +2876,16 @@
               <FileType>1</FileType>
               <FilePath>..\BSP\bsp_io.c</FilePath>
             </File>
+            <File>
+              <FileName>driver_rotary_encoder.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSP\driver_rotary_encoder.c</FilePath>
+            </File>
+            <File>
+              <FileName>driver_touch.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSP\driver_touch.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
