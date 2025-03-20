@@ -21,6 +21,7 @@
 #include "main.h"
 #include "cmsis_os.h"
 #include "board.h"
+#include "driver_delays.h"
 /* Definitions for defaultTask */
 osThreadId_t ExtIoTaskHandle;
 const osThreadAttr_t IoTask_attributes = {
@@ -73,7 +74,6 @@ void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
   * @retval None
   */
 void MX_FREERTOS_Init(void) {
-
 
   ExtIoTaskHandle = osThreadNew(EXT_IO_Task, NULL, &IoTask_attributes);
   LedTaskHandle = osThreadNew(led_task, NULL, &LedTask_attributes);
@@ -162,7 +162,15 @@ void lcd_menu_task(void *argument)
 {
 	for(;;)
 	{
-		
+		LCD_CS_HIGH();
+		LCD_SCK_HIGH();
+		LCD_MOSI_HIGH();
+		osDelay(10);
+		LCD_CS_LOW();
+		LCD_SCK_LOW();
+		LCD_MOSI_LOW();
+		osDelay(10);
+//		LCD_ST7365_On();
 	}
 }
 

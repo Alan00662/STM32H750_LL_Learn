@@ -37,6 +37,7 @@ void delaysInit(void)
   DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk;
 }
 
+//0.1us
 void delay_01us(uint32_t count)
 {
   volatile uint32_t dwtStart = ticksNow();
@@ -54,12 +55,13 @@ void delay_us(uint32_t count)
 void delay_1ms(void)
 {
   volatile uint32_t dwtStart = ticksNow();
-  volatile uint32_t dwtTotal = SYSTEM_TICKS_1MS - 10;
+  volatile uint32_t dwtTotal = (SYSTEM_TICKS_1MS - 10)/2;
   while ((ticksNow() - dwtStart) < dwtTotal);
 }
 
 void delay_ms(uint32_t count)
 {
+
   while (count--) {
     delay_1ms();
   }

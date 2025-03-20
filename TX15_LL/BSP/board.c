@@ -9,8 +9,8 @@
 #include "usart.h"
 #include "gpio.h"
 #include "fmc.h"
-
-
+#include "tim.h"
+#include "driver_delays.h"
 void boardInit(void)
 {
 	MPU_Config();
@@ -18,7 +18,8 @@ void boardInit(void)
   SystemClock_Config();
   PeriphCommonClock_Config();
   MX_GPIO_Init();
-	
+	delaysInit(); //FreeRTOS×¨ÓÃÑÓÊ±
+	pwrInit();
 	pwrOn();
 	
   MX_UART4_Init();
@@ -33,17 +34,19 @@ void boardInit(void)
   MX_ADC1_Init();
   MX_ADC3_Init();
   MX_FMC_Init();
-	debug_tx5("init ok\n");
-	extflash_test();
+//	extflash_test();
+
 	lcdInit();
 	keysInit();
 	ledInit();
-	bsp_io_init();
-	
+//	bsp_io_init();
+
+			
 	rotaryEncoderInit();
   touchPanelInit();
   //audioInit(&audioConfig);
   adcInit();
+	debug_tx5("boardInit ok\n");
 }
 
 void boardOff(void)

@@ -26,6 +26,7 @@
 #include "ltdc.h"
 #include "memorymap.h"
 #include "quadspi.h"
+#include "rtc.h"
 #include "sdmmc.h"
 #include "tim.h"
 #include "usart.h"
@@ -116,7 +117,6 @@ int main(void)
   MX_DMA_Init();
   MX_UART4_Init();
   MX_UART5_Init();
-  MX_USART1_UART_Init();
   MX_USART2_UART_Init();
   MX_USART3_UART_Init();
   MX_USART6_UART_Init();
@@ -131,6 +131,8 @@ int main(void)
   MX_TIM3_Init();
   MX_TIM17_Init();
   MX_SDMMC1_SD_Init();
+  MX_RTC_Init();
+  MX_TIM4_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
@@ -182,6 +184,14 @@ void SystemClock_Config(void)
   {
 
   }
+  LL_RCC_LSI_Enable();
+
+   /* Wait till LSI is ready */
+  while(LL_RCC_LSI_IsReady() != 1)
+  {
+
+  }
+  LL_PWR_EnableBkUpAccess();
   LL_RCC_PLL_SetSource(LL_RCC_PLLSOURCE_HSE);
   LL_RCC_PLL1P_Enable();
   LL_RCC_PLL1Q_Enable();

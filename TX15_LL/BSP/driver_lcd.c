@@ -1,9 +1,23 @@
-
 #include "driver_lcd.h"
 #include "hal.h"
 #include "ltdc.h"
 #include "driver_delays.h"
 #include "driver_backlight.h"
+#include "usart.h"
+
+#include "board.h"
+#include "driver_system_clock.h"
+#include "adc.h"
+#include "dma2d.h"
+#include "i2c.h"
+#include "ltdc.h"
+#include "memorymap.h"
+#include "usart.h"
+#include "gpio.h"
+#include "fmc.h"
+#include "tim.h"
+#include "cmsis_os.h"
+
 
 static void LCD_Delay(void) 
 {
@@ -19,13 +33,20 @@ static void lcdSpiConfig(void)
   LL_GPIO_InitTypeDef GPIO_InitStructure;
   LL_GPIO_StructInit(&GPIO_InitStructure);
 
-  GPIO_InitStructure.Pin        = LCD_SPI_SCK_GPIO_PIN | LCD_SPI_MOSI_GPIO_PIN;
+  GPIO_InitStructure.Pin        = LCD_SPI_SCK_GPIO_PIN;
   GPIO_InitStructure.Speed      = LL_GPIO_SPEED_FREQ_LOW;
   GPIO_InitStructure.Mode       = LL_GPIO_MODE_OUTPUT;
   GPIO_InitStructure.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
   GPIO_InitStructure.Pull       = LL_GPIO_PULL_NO;
-  LL_GPIO_Init(LCD_SPI_GPIO, &GPIO_InitStructure);
+  LL_GPIO_Init(LCD_SPI_SCK_GPIO, &GPIO_InitStructure);
 
+	GPIO_InitStructure.Pin        = LCD_SPI_MOSI_GPIO_PIN;
+  GPIO_InitStructure.Speed      = LL_GPIO_SPEED_FREQ_LOW;
+  GPIO_InitStructure.Mode       = LL_GPIO_MODE_OUTPUT;
+  GPIO_InitStructure.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
+  GPIO_InitStructure.Pull       = LL_GPIO_PULL_NO;
+  LL_GPIO_Init(LCD_SPI_MOSI_GPIO, &GPIO_InitStructure);
+	
   GPIO_InitStructure.Pin        = LCD_SPI_CS_GPIO_PIN;
   LL_GPIO_Init(LCD_SPI_CS_GPIO, &GPIO_InitStructure);
 
@@ -37,12 +58,13 @@ static void lcdSpiConfig(void)
 
 
 void lcdDelay() {
+
   delay_01us(1);
+
 }
 
-static void lcdReset() {
+void lcdReset() {
   LCD_CS_HIGH();
-
   LCD_NRST_HIGH();
   delay_ms(1);
 
@@ -50,6 +72,7 @@ static void lcdReset() {
   delay_ms(10);
 
   LCD_NRST_HIGH();
+	LCD_Delay();
   delay_ms(100);
 }
 
@@ -163,9 +186,12 @@ static void lcdWriteData(uint8_t data)
 
 void LCD_ST7365_On(void) {
   LCD_CS_LOW();
-  delay_ms(1);
+//  delay_ms(10);
+	lcdDelay();
   lcdWriteCommand(0x29);
   LCD_CS_HIGH();
+//	lcdDelay();
+//	delay_ms(10);
 }
 
 void LCD_ST7365_Init(void) {
@@ -306,6 +332,11 @@ void lcdSetInitalFrameBuffer(void* fbAddress)
 
 void lcdInit(void)
 {
+	#if BackLight_USE_PWM == 1
+	MX_TIM8_Init();
+	#else
+	backlight_gpio_init();
+	#endif
 	lcdOn();
 	lcdSpiConfig();
 	lcdReset();

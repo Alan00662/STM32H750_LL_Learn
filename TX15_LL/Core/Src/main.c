@@ -37,9 +37,11 @@ void MX_FREERTOS_Init(void);
 
 int main(void)
 {
+//	SCB->VTOR=0x90000000;
 	SCB_EnableICache();		// 使能ICache
 	SCB_EnableDCache();		// 使能DCache
 	boardInit();
+
   osKernelInitialize();
 
   MX_FREERTOS_Init();

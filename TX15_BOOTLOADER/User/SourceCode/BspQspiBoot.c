@@ -434,7 +434,8 @@ void BspQspiBoot_JumpToApp(void)
 	/* 跳转成功的话，不会执行到这里，用户可以在这里添加代码 */
 	while (1)
 	{
-
+		HAL_Delay(300);
+		HAL_GPIO_TogglePin(LED_R_GPIO_Port,LED_R_Pin);
 	}
 }
 

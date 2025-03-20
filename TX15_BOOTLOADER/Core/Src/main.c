@@ -100,14 +100,14 @@ int main(void)
   MX_USB_OTG_FS_PCD_Init();
   /* USER CODE BEGIN 2 */
   BspQspiBoot_MemMapped();
-	BspQspiBoot_JumpToApp();
+	BspQspiBoot_JumpToApp();																																																																																															
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-		HAL_Delay(100);
+		HAL_Delay(300);
 		HAL_GPIO_TogglePin(LED_R_GPIO_Port,LED_R_Pin);
     /* USER CODE END WHILE */
 

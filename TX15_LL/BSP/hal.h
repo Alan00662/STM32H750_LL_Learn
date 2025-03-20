@@ -54,7 +54,7 @@
 
 // ADC
 #define ADC_GPIO_PIN_STICK_LH           LL_GPIO_PIN_6      // PA.06
-#define ADC_GPIO_PIN_STICK_LV           LL_GPIO_PIN_0      // PA.01
+#define ADC_GPIO_PIN_STICK_LV           LL_GPIO_PIN_3      // PC.03
 #define ADC_GPIO_PIN_STICK_RV           LL_GPIO_PIN_4      // PC.04
 #define ADC_GPIO_PIN_STICK_RH           LL_GPIO_PIN_5      // PC.05
 
@@ -62,9 +62,9 @@
 #define ADC_GPIO_PIN_POT2               LL_GPIO_PIN_1      // PB.01 POT2
 #define ADC_GPIO_PIN_BATT               LL_GPIO_PIN_3      // PH.03
 
-#define ADC_GPIOA_PINS                  (ADC_GPIO_PIN_STICK_LH | ADC_GPIO_PIN_STICK_LV)
+#define ADC_GPIOA_PINS                  (ADC_GPIO_PIN_STICK_LH )
 #define ADC_GPIOB_PINS                  (ADC_GPIO_PIN_POT2)
-#define ADC_GPIOC_PINS                  (ADC_GPIO_PIN_STICK_RV | ADC_GPIO_PIN_STICK_RH | ADC_GPIO_PIN_POT1)
+#define ADC_GPIOC_PINS                  (ADC_GPIO_PIN_STICK_RV | ADC_GPIO_PIN_STICK_LV|ADC_GPIO_PIN_STICK_RH | ADC_GPIO_PIN_POT1)
 #define ADC_GPIOH_PINS                  (ADC_GPIO_PIN_BATT)
 
 
@@ -148,11 +148,12 @@
 #define PWR_ON_GPIO_PIN                 LL_GPIO_PIN_12
 
 // LCD
-#define LCD_SPI_CS_GPIO                 GPIOG
-#define LCD_SPI_CS_GPIO_PIN             LL_GPIO_PIN_6
-#define LCD_SPI_GPIO                    GPIOF
-#define LCD_SPI_SCK_GPIO_PIN            LL_GPIO_PIN_10
-#define LCD_SPI_MOSI_GPIO_PIN           LL_GPIO_PIN_8
+#define LCD_SPI_CS_GPIO                 GPIOA
+#define LCD_SPI_CS_GPIO_PIN             LL_GPIO_PIN_7
+#define LCD_SPI_SCK_GPIO                GPIOB
+#define LCD_SPI_SCK_GPIO_PIN            LL_GPIO_PIN_0
+#define LCD_SPI_MOSI_GPIO               GPIOI
+#define LCD_SPI_MOSI_GPIO_PIN           LL_GPIO_PIN_9
 #define LTDC_IRQ_PRIO                   4
 #define DMA_SCREEN_IRQ_PRIO             6
 

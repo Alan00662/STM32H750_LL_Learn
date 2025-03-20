@@ -58,14 +58,14 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define BTN_DOWN_Pin GPIO_PIN_13
-#define BTN_DOWN_GPIO_Port GPIOC
-#define LED_R_Pin GPIO_PIN_12
-#define LED_R_GPIO_Port GPIOB
-#define PWR_Pin GPIO_PIN_0
-#define PWR_GPIO_Port GPIOE
-#define BTN_UP_Pin GPIO_PIN_1
-#define BTN_UP_GPIO_Port GPIOE
+//#define BTN_DOWN_Pin GPIO_PIN_13
+//#define BTN_DOWN_GPIO_Port GPIOC
+#define LED_R_Pin GPIO_PIN_8
+#define LED_R_GPIO_Port GPIOI
+#define PWR_Pin GPIO_PIN_12
+#define PWR_GPIO_Port GPIOH
+//#define BTN_UP_Pin GPIO_PIN_1
+//#define BTN_UP_GPIO_Port GPIOE
 
 /* USER CODE BEGIN Private defines */
 

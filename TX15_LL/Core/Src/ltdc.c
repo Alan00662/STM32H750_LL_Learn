@@ -57,7 +57,7 @@ void MX_LTDC_Init(void)
   hltdc.Init.TotalWidth = lcd_phys_w + HBP + HFP + HSW -1;
 	hltdc.Init.TotalHeigh = lcd_phys_h + VBP + VFP+VSH-1;
   hltdc.Init.Backcolor.Blue = 0;
-  hltdc.Init.Backcolor.Green = 0;
+  hltdc.Init.Backcolor.Green = 0xff;
   hltdc.Init.Backcolor.Red = 0;
   if (HAL_LTDC_Init(&hltdc) != HAL_OK)
   {
