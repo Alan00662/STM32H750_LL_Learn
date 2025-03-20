@@ -162,15 +162,7 @@ void lcd_menu_task(void *argument)
 {
 	for(;;)
 	{
-		LCD_CS_HIGH();
-		LCD_SCK_HIGH();
-		LCD_MOSI_HIGH();
-		osDelay(10);
-		LCD_CS_LOW();
-		LCD_SCK_LOW();
-		LCD_MOSI_LOW();
-		osDelay(10);
-//		LCD_ST7365_On();
+
 	}
 }
 

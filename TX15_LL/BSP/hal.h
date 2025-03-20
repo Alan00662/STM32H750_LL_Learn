@@ -161,8 +161,8 @@
 #define LCD_RESET_GPIO_PIN              LL_GPIO_PIN_12
 
 // Backlight
-#define BACKLIGHT_GPIO                  GPIOI
-#define BACKLIGHT_GPIO_PIN              LL_GPIO_PIN_2 // TIM8_CH4
+#define BACKLIGHT_GPIO                  GPIOA
+#define BACKLIGHT_GPIO_PIN              LL_GPIO_PIN_10
 #define BACKLIGHT_TIMER                 TIM8
 #define BACKLIGHT_GPIO_AF               GPIO_AF3
 #define BACKLIGHT_TIMER_FREQ            (PERI1_FREQUENCY * TIMER_MULT_APB1)

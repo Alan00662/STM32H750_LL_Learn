@@ -397,7 +397,7 @@ void BspQspiBoot_JumpToApp(void)
 	uint32_t i=0;
 	void (*AppJump)(void);         /* 声明一个函数指针 */
 	__IO uint32_t AppAddr = 0x90000000;  /* APP 地址 */
-
+	debug_tx5("Boot Start Jump To App....");
     /* 关闭全局中断 */
 	DISABLE_INT(); 
     
