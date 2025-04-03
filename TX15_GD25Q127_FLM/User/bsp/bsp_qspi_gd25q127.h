@@ -2,7 +2,7 @@
 #ifndef _BSP_QSPI_GD25Q127_H
 #define _BSP_QSPI_GD25Q127_H
 #include "stm32h7xx_hal.h"
-#define QSPI_FLASH_MEM_ADDR         			  0x90000000 //W25Qxx系列芯片的首地址！！
+#define QSPI_FLASH_MEM_ADDR         			  0x90000000 //W25Qxx系列芯片的首地址
 
 
 /* W25Q128JV基本信息 */
@@ -24,39 +24,39 @@
 
 /* QSPI引脚和时钟相关配置宏定义 */
 
-#define QSPI_CS_GPIO_CLK_ENABLE()       __HAL_RCC_GPIOG_CLK_ENABLE()//注意修改启动的时钟源
-#define QSPI_CLK_GPIO_CLK_ENABLE()      __HAL_RCC_GPIOF_CLK_ENABLE()//注意修改启动的时钟源
-#define QSPI_BK1_D0_GPIO_CLK_ENABLE()   __HAL_RCC_GPIOF_CLK_ENABLE()//注意修改启动的时钟源
-#define QSPI_BK1_D1_GPIO_CLK_ENABLE()   __HAL_RCC_GPIOF_CLK_ENABLE()//注意修改启动的时钟源
-#define QSPI_BK1_D2_GPIO_CLK_ENABLE()   __HAL_RCC_GPIOF_CLK_ENABLE()//注意修改启动的时钟源
-#define QSPI_BK1_D3_GPIO_CLK_ENABLE()   __HAL_RCC_GPIOF_CLK_ENABLE()//注意修改启动的时钟源
+#define QSPI_CS_GPIO_CLK_ENABLE()       __HAL_RCC_GPIOG_CLK_ENABLE()
+#define QSPI_CLK_GPIO_CLK_ENABLE()      __HAL_RCC_GPIOF_CLK_ENABLE()
+#define QSPI_BK1_D0_GPIO_CLK_ENABLE()   __HAL_RCC_GPIOF_CLK_ENABLE()
+#define QSPI_BK1_D1_GPIO_CLK_ENABLE()   __HAL_RCC_GPIOF_CLK_ENABLE()
+#define QSPI_BK1_D2_GPIO_CLK_ENABLE()   __HAL_RCC_GPIOF_CLK_ENABLE()
+#define QSPI_BK1_D3_GPIO_CLK_ENABLE()   __HAL_RCC_GPIOF_CLK_ENABLE()
 
 #define QSPI_FORCE_RESET()              __HAL_RCC_QSPI_FORCE_RESET()
 #define QSPI_RELEASE_RESET()            __HAL_RCC_QSPI_RELEASE_RESET()
 
 #define QSPI_CS_PIN                     GPIO_PIN_6 //QSPI_CS
 #define QSPI_CS_GPIO_PORT               GPIOG
-#define QSPI_CS_GPIO_AF                 GPIO_AF10_QUADSPI//有坑，自行比较CubeMX生成的正确指向
+#define QSPI_CS_GPIO_AF                 GPIO_AF10_QUADSPI
 
 #define QSPI_CLK_PIN                    GPIO_PIN_10 //QSPI_CLK
 #define QSPI_CLK_GPIO_PORT              GPIOF
-#define QSPI_CLK_GPIO_AF                GPIO_AF9_QUADSPI//有坑，自行比较CubeMX生成的正确指向
+#define QSPI_CLK_GPIO_AF                GPIO_AF9_QUADSPI
 
 #define QSPI_BK1_D0_PIN                 GPIO_PIN_8 //QSPI_BK1_D0
 #define QSPI_BK1_D0_GPIO_PORT           GPIOF
-#define QSPI_BK1_D0_GPIO_AF             GPIO_AF10_QUADSPI//有坑，自行比较CubeMX生成的正确指向
+#define QSPI_BK1_D0_GPIO_AF             GPIO_AF10_QUADSPI
 
 #define QSPI_BK1_D1_PIN                 GPIO_PIN_9 //QSPI_BK1_D1
 #define QSPI_BK1_D1_GPIO_PORT           GPIOF
-#define QSPI_BK1_D1_GPIO_AF             GPIO_AF10_QUADSPI//有坑，自行比较CubeMX生成的正确指向
+#define QSPI_BK1_D1_GPIO_AF             GPIO_AF10_QUADSPI
 
 #define QSPI_BK1_D2_PIN                 GPIO_PIN_7 //QSPI_BK1_D2
 #define QSPI_BK1_D2_GPIO_PORT           GPIOF
-#define QSPI_BK1_D2_GPIO_AF             GPIO_AF9_QUADSPI//有坑，自行比较CubeMX生成的正确指向
+#define QSPI_BK1_D2_GPIO_AF             GPIO_AF9_QUADSPI
 
 #define QSPI_BK1_D3_PIN                 GPIO_PIN_6 //QSPI_BK1_D3
 #define QSPI_BK1_D3_GPIO_PORT           GPIOF
-#define QSPI_BK1_D3_GPIO_AF             GPIO_AF9_QUADSPI//有坑，自行比较CubeMX生成的正确指向
+#define QSPI_BK1_D3_GPIO_AF             GPIO_AF9_QUADSPI
 
 
 uint8_t QSPI_WriteEnable(void);//写使能

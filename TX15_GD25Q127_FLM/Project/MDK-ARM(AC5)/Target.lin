@@ -1,15 +1,7 @@
 ; Linker Control File (scatter-loading)
 ;
-
-;Vect 0 
-;{
-;	Vector 0
-;	{
-;	* (+RO-DATA)
-;	}
-;}
-
-PRG 0 PI            ; Programming Functions
+ 
+PRG 0x24000004 PI               ; Programming Functions
 {
   PrgCode +0           ; Code
   {
@@ -20,11 +12,11 @@ PRG 0 PI            ; Programming Functions
     * (+RW,+ZI)
   }
 }
-
+ 
 DSCR +0                ; Device Description
 {
   DevDscr +0
   {
-    FlashDev.o
+    Dev_Inf.o
   }
 }

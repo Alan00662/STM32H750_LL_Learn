@@ -20,7 +20,7 @@ int Init (unsigned long adr, unsigned long clk, unsigned long fnc)
     /* 系统初始化 */
     SystemInit(); 
     /* 时钟初始化 */
-    if (SystemClock_Config()  != 0) return 1;//失败则返回1
+    SystemClock_Config();//失败则返回1
     /* W25Q256初始化 */
     if (bsp_InitQSPI_W25Q128() != 0)return 1;//失败则返回1
     /* 内存映射 */    
