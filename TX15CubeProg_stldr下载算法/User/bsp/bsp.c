@@ -98,4 +98,3 @@ int SystemClock_Config(void)
     return 0;
 }
 
-/***************************** 安富莱电子 www.armfly.com (END OF FILE) *********************************/

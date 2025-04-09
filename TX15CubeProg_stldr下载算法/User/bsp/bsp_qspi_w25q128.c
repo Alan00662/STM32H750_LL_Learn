@@ -106,13 +106,8 @@ int bsp_InitQSPI_W25Q256(void)
        MODE3: 表示片选信号空闲期间，CLK时钟信号是高电平
     */
     QSPIHandle.Init.ClockMode = QSPI_CLOCK_MODE_0;
-
-    /* 根据CS引脚接线QSPI有两个BANK*/
     QSPIHandle.Init.FlashID = QSPI_FLASH_ID_1;
-    /* V7开发板仅使用了BANK1，这里是禁止双BANK */
     QSPIHandle.Init.DualFlash = QSPI_DUALFLASH_DISABLE;
-
-    /* 初始化配置QSPI */
     if (HAL_QSPI_Init(&QSPIHandle) != HAL_OK)
     {
         return 1;
@@ -541,7 +536,7 @@ int QSPI_MemoryMapped(void)
     s_command.SIOOMode = QSPI_SIOO_INST_EVERY_CMD;            /* 每次传输都发指令 */
     
     /* 全部采用4线 */
-    s_command.Instruction = QUAD_INOUT_FAST_READ_CMD; /* 快速读取命令 */
+    s_command.Instruction = QUAD_INOUT_FAST_READ_CMD; 					/* 快速读取命令 */
     s_command.AddressMode = QSPI_ADDRESS_4_LINES;                 /* 4个地址线 */
     s_command.DataMode = QSPI_DATA_4_LINES;                       /* 4个数据线 */
     s_command.DummyCycles = 6;                                    /* 空周期 */
@@ -574,4 +569,4 @@ int QSPI_QuitMemoryMapped(void)
     return 0;
 }
           
-/***************************** 安富莱电子 www.armfly.com (END OF FILE) *********************************/
+
