@@ -54,12 +54,12 @@ const osThreadAttr_t defaultTask_attributes = {
   .stack_size = 128 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
-/* Definitions for ledTask */
-osThreadId_t ledTaskHandle;
-const osThreadAttr_t ledTask_attributes = {
-  .name = "ledTask",
+/* Definitions for LedTask */
+osThreadId_t LedTaskHandle;
+const osThreadAttr_t LedTask_attributes = {
+  .name = "LedTask",
   .stack_size = 128 * 4,
-  .priority = (osPriority_t) osPriorityBelowNormal,
+  .priority = (osPriority_t) osPriorityLow,
 };
 
 /* Private function prototypes -----------------------------------------------*/
@@ -68,7 +68,7 @@ const osThreadAttr_t ledTask_attributes = {
 /* USER CODE END FunctionPrototypes */
 
 void StartDefaultTask(void *argument);
-void LedTask(void *argument);
+void led_task(void *argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -102,8 +102,8 @@ void MX_FREERTOS_Init(void) {
   /* creation of defaultTask */
   defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
 
-  /* creation of ledTask */
-  ledTaskHandle = osThreadNew(LedTask, NULL, &ledTask_attributes);
+  /* creation of LedTask */
+  LedTaskHandle = osThreadNew(led_task, NULL, &LedTask_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -133,22 +133,22 @@ void StartDefaultTask(void *argument)
   /* USER CODE END StartDefaultTask */
 }
 
-/* USER CODE BEGIN Header_LedTask */
+/* USER CODE BEGIN Header_led_task */
 /**
-* @brief Function implementing the ledTask thread.
+* @brief Function implementing the LedTask thread.
 * @param argument: Not used
 * @retval None
 */
-/* USER CODE END Header_LedTask */
-void LedTask(void *argument)
+/* USER CODE END Header_led_task */
+void led_task(void *argument)
 {
-  /* USER CODE BEGIN LedTask */
+  /* USER CODE BEGIN led_task */
   /* Infinite loop */
   for (;;) {
     HAL_GPIO_TogglePin(GPIOI, LEDG_Pin|LEDB_Pin|LEDR_Pin);
     osDelay(500);
   }
-  /* USER CODE END LedTask */
+  /* USER CODE END led_task */
 }
 
 /* Private application code --------------------------------------------------*/
