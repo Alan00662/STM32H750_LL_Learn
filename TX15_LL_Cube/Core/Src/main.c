@@ -20,11 +20,12 @@
 #include "main.h"
 #include "cmsis_os.h"
 #include "adc.h"
+#include "dac.h"
 #include "dma.h"
 #include "dma2d.h"
 #include "i2c.h"
 #include "ltdc.h"
-#include "memorymap.h"
+#include "mdma.h"
 #include "quadspi.h"
 #include "rtc.h"
 #include "sdmmc.h"
@@ -115,7 +116,7 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_DMA_Init();
-  MX_UART4_Init();
+  MX_MDMA_Init();
   MX_UART5_Init();
   MX_USART2_UART_Init();
   MX_USART3_UART_Init();
@@ -133,14 +134,15 @@ int main(void)
   MX_SDMMC1_SD_Init();
   MX_RTC_Init();
   MX_TIM4_Init();
+  MX_USART1_UART_Init();
+  MX_I2C1_Init();
+  MX_DAC1_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
 
   /* Init scheduler */
-  osKernelInitialize();
-
-  /* Call init function for freertos objects (in cmsis_os2.c) */
+  osKernelInitialize();  /* Call init function for freertos objects (in cmsis_os2.c) */
   MX_FREERTOS_Init();
 
   /* Start scheduler */
@@ -167,12 +169,12 @@ int main(void)
   */
 void SystemClock_Config(void)
 {
-  LL_FLASH_SetLatency(LL_FLASH_LATENCY_1);
-  while(LL_FLASH_GetLatency()!= LL_FLASH_LATENCY_1)
+  LL_FLASH_SetLatency(LL_FLASH_LATENCY_4);
+  while(LL_FLASH_GetLatency()!= LL_FLASH_LATENCY_4)
   {
   }
   LL_PWR_ConfigSupply(LL_PWR_LDO_SUPPLY);
-  LL_PWR_SetRegulVoltageScaling(LL_PWR_REGU_VOLTAGE_SCALE3);
+  LL_PWR_SetRegulVoltageScaling(LL_PWR_REGU_VOLTAGE_SCALE0);
   while (LL_PWR_IsActiveFlag_VOS() == 0)
   {
   }
@@ -184,6 +186,15 @@ void SystemClock_Config(void)
   {
 
   }
+  LL_RCC_HSI_Enable();
+
+   /* Wait till HSI is ready */
+  while(LL_RCC_HSI_IsReady() != 1)
+  {
+
+  }
+  LL_RCC_HSI_SetCalibTrimming(64);
+  LL_RCC_HSI_SetDivider(LL_RCC_HSI_DIV1);
   LL_RCC_LSI_Enable();
 
    /* Wait till LSI is ready */
@@ -196,11 +207,11 @@ void SystemClock_Config(void)
   LL_RCC_PLL1P_Enable();
   LL_RCC_PLL1Q_Enable();
   LL_RCC_PLL1_SetVCOInputRange(LL_RCC_PLLINPUTRANGE_8_16);
-  LL_RCC_PLL1_SetVCOOutputRange(LL_RCC_PLLVCORANGE_MEDIUM);
+  LL_RCC_PLL1_SetVCOOutputRange(LL_RCC_PLLVCORANGE_WIDE);
   LL_RCC_PLL1_SetM(3);
-  LL_RCC_PLL1_SetN(10);
+  LL_RCC_PLL1_SetN(60);
   LL_RCC_PLL1_SetP(2);
-  LL_RCC_PLL1_SetQ(2);
+  LL_RCC_PLL1_SetQ(20);
   LL_RCC_PLL1_SetR(2);
   LL_RCC_PLL1_Enable();
 
@@ -208,6 +219,9 @@ void SystemClock_Config(void)
   while(LL_RCC_PLL1_IsReady() != 1)
   {
   }
+
+   /* Intermediate AHB prescaler 2 when target frequency clock is higher than 80 MHz */
+   LL_RCC_SetAHBPrescaler(LL_RCC_AHB_DIV_2);
 
   LL_RCC_SetSysClkSource(LL_RCC_SYS_CLKSOURCE_PLL1);
 
@@ -217,12 +231,12 @@ void SystemClock_Config(void)
 
   }
   LL_RCC_SetSysPrescaler(LL_RCC_SYSCLK_DIV_1);
-  LL_RCC_SetAHBPrescaler(LL_RCC_AHB_DIV_1);
+  LL_RCC_SetAHBPrescaler(LL_RCC_AHB_DIV_2);
   LL_RCC_SetAPB1Prescaler(LL_RCC_APB1_DIV_2);
   LL_RCC_SetAPB2Prescaler(LL_RCC_APB2_DIV_2);
-  LL_RCC_SetAPB3Prescaler(LL_RCC_APB3_DIV_1);
+  LL_RCC_SetAPB3Prescaler(LL_RCC_APB3_DIV_2);
   LL_RCC_SetAPB4Prescaler(LL_RCC_APB4_DIV_2);
-  LL_SetSystemCoreClock(80000000);
+  LL_SetSystemCoreClock(480000000);
 
    /* Update the time base */
   if (HAL_InitTick (TICK_INT_PRIORITY) != HAL_OK)
@@ -237,14 +251,14 @@ void SystemClock_Config(void)
   */
 void PeriphCommonClock_Config(void)
 {
-  LL_RCC_PLL2P_Enable();
-  LL_RCC_PLL2_SetVCOInputRange(LL_RCC_PLLINPUTRANGE_8_16);
-  LL_RCC_PLL2_SetVCOOutputRange(LL_RCC_PLLVCORANGE_MEDIUM);
-  LL_RCC_PLL2_SetM(3);
-  LL_RCC_PLL2_SetN(10);
-  LL_RCC_PLL2_SetP(2);
-  LL_RCC_PLL2_SetQ(2);
-  LL_RCC_PLL2_SetR(2);
+  LL_RCC_PLL2R_Enable();
+  LL_RCC_PLL2_SetVCOInputRange(LL_RCC_PLLINPUTRANGE_2_4);
+  LL_RCC_PLL2_SetVCOOutputRange(LL_RCC_PLLVCORANGE_WIDE);
+  LL_RCC_PLL2_SetM(24);
+  LL_RCC_PLL2_SetN(96);
+  LL_RCC_PLL2_SetP(26);
+  LL_RCC_PLL2_SetQ(4);
+  LL_RCC_PLL2_SetR(1);
   LL_RCC_PLL2_Enable();
 
    /* Wait till PLL is ready */
@@ -259,7 +273,7 @@ void PeriphCommonClock_Config(void)
   LL_RCC_PLL3_SetN(4);
   LL_RCC_PLL3_SetP(2);
   LL_RCC_PLL3_SetQ(2);
-  LL_RCC_PLL3_SetR(4);
+  LL_RCC_PLL3_SetR(18);
   LL_RCC_PLL3_Enable();
 
    /* Wait till PLL is ready */
@@ -267,6 +281,7 @@ void PeriphCommonClock_Config(void)
   {
   }
 
+  LL_RCC_SetCLKPClockSource(LL_RCC_CLKP_CLKSOURCE_HSI);
 }
 
 /* USER CODE BEGIN 4 */
@@ -302,7 +317,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   /* USER CODE BEGIN Callback 0 */
 
   /* USER CODE END Callback 0 */
-  if (htim->Instance == TIM1) {
+  if (htim->Instance == TIM1)
+  {
     HAL_IncTick();
   }
   /* USER CODE BEGIN Callback 1 */
@@ -324,8 +340,7 @@ void Error_Handler(void)
   }
   /* USER CODE END Error_Handler_Debug */
 }
-
-#ifdef  USE_FULL_ASSERT
+#ifdef USE_FULL_ASSERT
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.

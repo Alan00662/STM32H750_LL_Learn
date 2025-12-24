@@ -30,6 +30,7 @@ extern "C" {
 #include "stm32h7xx_hal.h"
 
 #include "stm32h7xx_ll_adc.h"
+#include "stm32h7xx_ll_dac.h"
 #include "stm32h7xx_ll_dma.h"
 #include "stm32h7xx_ll_dma2d.h"
 #include "stm32h7xx_ll_i2c.h"
@@ -89,8 +90,6 @@ void Error_Handler(void);
 #define PAGE_L_GPIO_Port GPIOG
 #define RTN_Pin LL_GPIO_PIN_3
 #define RTN_GPIO_Port GPIOG
-#define TELE_Pin LL_GPIO_PIN_2
-#define TELE_GPIO_Port GPIOG
 #define SYS_Pin LL_GPIO_PIN_2
 #define SYS_GPIO_Port GPIOB
 #define PWR_Pin LL_GPIO_PIN_12

@@ -9,6 +9,8 @@ void hapticInit(void)
 
 void hapticOn(uint32_t pwmPercent)
 {
+	
+	
   if (pwmPercent > 100) pwmPercent = 100;
 		LL_TIM_OC_SetCompareCH2(TIM2, pwmPercent);
 //  stm32_pulse_set_cmp_val(&_haptic_timer, pwmPercent);

@@ -46,7 +46,7 @@ void MX_FMC_Init(void)
   /* hsdram1.Init */
   hsdram1.Init.SDBank = FMC_SDRAM_BANK2;
   hsdram1.Init.ColumnBitsNumber = FMC_SDRAM_COLUMN_BITS_NUM_8;
-  hsdram1.Init.RowBitsNumber = FMC_SDRAM_ROW_BITS_NUM_11;
+  hsdram1.Init.RowBitsNumber = FMC_SDRAM_ROW_BITS_NUM_13;
   hsdram1.Init.MemoryDataWidth = FMC_SDRAM_MEM_BUS_WIDTH_16;
   hsdram1.Init.InternalBankNumber = FMC_SDRAM_INTERN_BANKS_NUM_2;
   hsdram1.Init.CASLatency = FMC_SDRAM_CAS_LATENCY_1;
@@ -85,7 +85,7 @@ static void HAL_FMC_MspInit(void){
   }
   FMC_Initialized = 1;
 
-    LL_RCC_SetFMCClockSource(LL_RCC_FMC_CLKSOURCE_HCLK);
+    LL_RCC_SetFMCClockSource(LL_RCC_FMC_CLKSOURCE_PLL2R);
 
   /* Peripheral clock enable */
   __HAL_RCC_FMC_CLK_ENABLE();
@@ -103,6 +103,7 @@ static void HAL_FMC_MspInit(void){
   PG5   ------> FMC_BA1
   PF3   ------> FMC_A3
   PG4   ------> FMC_BA0
+  PG2   ------> FMC_A12
   PF5   ------> FMC_A5
   PF4   ------> FMC_A4
   PC0   ------> FMC_SDNWE
@@ -143,7 +144,7 @@ static void HAL_FMC_MspInit(void){
 
   /* GPIO_InitStruct */
   GPIO_InitStruct.Pin = GPIO_PIN_15|GPIO_PIN_8|GPIO_PIN_5|GPIO_PIN_4
-                          |GPIO_PIN_0|GPIO_PIN_1;
+                          |GPIO_PIN_2|GPIO_PIN_0|GPIO_PIN_1;
   GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
@@ -231,6 +232,7 @@ static void HAL_FMC_MspDeInit(void){
   PG5   ------> FMC_BA1
   PF3   ------> FMC_A3
   PG4   ------> FMC_BA0
+  PG2   ------> FMC_A12
   PF5   ------> FMC_A5
   PF4   ------> FMC_A4
   PC0   ------> FMC_SDNWE
@@ -264,7 +266,7 @@ static void HAL_FMC_MspDeInit(void){
                           |GPIO_PIN_13|GPIO_PIN_7|GPIO_PIN_14);
 
   HAL_GPIO_DeInit(GPIOG, GPIO_PIN_15|GPIO_PIN_8|GPIO_PIN_5|GPIO_PIN_4
-                          |GPIO_PIN_0|GPIO_PIN_1);
+                          |GPIO_PIN_2|GPIO_PIN_0|GPIO_PIN_1);
 
   HAL_GPIO_DeInit(GPIOD, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_15|GPIO_PIN_14
                           |GPIO_PIN_10|GPIO_PIN_9|GPIO_PIN_8);
