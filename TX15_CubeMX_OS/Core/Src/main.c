@@ -132,7 +132,7 @@ int main(void)
   MX_I2C1_Init();
   MX_DAC1_Init();
   /* USER CODE BEGIN 2 */
-
+  HAL_GPIO_WritePin(POWER_ON_GPIO_Port, POWER_ON_Pin, GPIO_PIN_SET);
   /* USER CODE END 2 */
 
   /* Init scheduler */

@@ -75,10 +75,10 @@ void Error_Handler(void);
 #define RTN_GPIO_Port GPIOG
 #define SYS_Pin GPIO_PIN_2
 #define SYS_GPIO_Port GPIOB
-#define PWR_Pin GPIO_PIN_12
-#define PWR_GPIO_Port GPIOH
-#define PWR_KEY_Pin GPIO_PIN_4
-#define PWR_KEY_GPIO_Port GPIOA
+#define POWER_ON_Pin GPIO_PIN_12
+#define POWER_ON_GPIO_Port GPIOH
+#define POWER_SWITCH_Pin GPIO_PIN_4
+#define POWER_SWITCH_GPIO_Port GPIOA
 
 /* USER CODE BEGIN Private defines */
 
