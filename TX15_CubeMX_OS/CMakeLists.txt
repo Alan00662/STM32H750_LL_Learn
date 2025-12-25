@@ -45,14 +45,20 @@ target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined library search paths
 )
 
+file(GLOB BSP_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/BSP/*.c)
 # Add sources to executable
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user sources here
+    # ${CMAKE_CURRENT_SOURCE_DIR}/BSP/bsp_lcd_gpio.c
+    # ${CMAKE_CURRENT_SOURCE_DIR}/BSP/bsp_lcd.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/BSP/board.c
 )
 
 # Add include paths
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined include paths
+    ${CMAKE_CURRENT_SOURCE_DIR}/BSP
 )
 
 # Add project symbols (macros)

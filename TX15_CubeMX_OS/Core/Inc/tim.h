@@ -7,7 +7,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2025 STMicroelectronics.
+  * Copyright (c) 2024 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -28,30 +28,22 @@ extern "C" {
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
-/* USER CODE BEGIN Includes */
-
-/* USER CODE END Includes */
-
-extern TIM_HandleTypeDef htim3;
-
-extern TIM_HandleTypeDef htim4;
+/* USER CODE BEGIN Includes */ 
+#define USE_Encoder_Mode 0 //gpio中断 or timer_encoder
+/* USER CODE END Includes */ 
 
 extern TIM_HandleTypeDef htim8;
-
-extern TIM_HandleTypeDef htim17;
-
+extern TIM_HandleTypeDef htim8_in;
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
-
-void MX_TIM3_Init(void);
-void MX_TIM4_Init(void);
+void MX_TIM1_Init(void);
 void MX_TIM8_Init(void);
-void MX_TIM17_Init(void);
 
 void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
 
 /* USER CODE BEGIN Prototypes */
+void BackLight_pwm(uint16_t pwm);
 
 /* USER CODE END Prototypes */
 

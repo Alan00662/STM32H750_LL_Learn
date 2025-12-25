@@ -4,6 +4,9 @@
 #include "bsp_lcd.h"
 #include "quadspi.h"
 #include "tim.h"
+#include "board.h"
+
+uint16_t g_ltdc_lcd_framebuf[320][480] __attribute__((section(".bss.ARM.__at_0x24000000")));
 
 #if LCD_DIR ==0
 #define TFT_COLUMN_NUMBER  	320
@@ -16,7 +19,6 @@
 uint16_t backlight_pwm = 70;//70%
 const unsigned char  *point;
 
-#define LCD_SPI &qspi_tft
  
 
 static void SPI_SendData(unsigned char i)
@@ -218,7 +220,63 @@ void TFT_init(void)        ////ST7796
 	
 }
 
+void ltdc_draw_point(uint16_t x, uint16_t y, uint32_t color)
+{
+	#if LCD_DIR == 1 
+	*(uint16_t *)((uint32_t)g_ltdc_lcd_framebuf + 2 * (480 *y  + x)) = color;
+	#else 
+	*(uint16_t *)((uint32_t)g_ltdc_framebuf[lcdltdc.activelayer] + lcdltdc.pixsize * (lcdltdc.pwidth * y + x)) = color;
+	#endif
+}
+void ltdc_fill(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey, uint32_t color)
+{
 
+    uint32_t timeout = 0;
+    uint16_t offline =0 ; 
+    uint32_t addr;
+	
+
+#if LCD_DIR == 1 
+	addr = ((uint32_t)g_ltdc_lcd_framebuf + 2 * (480 *sy  + sx)) ;
+	offline = 480 - (ex - sx + 1); //行偏移
+#else
+	addr = ((uint32_t)g_ltdc_framebuf[lcdltdc.activelayer] + lcdltdc.pixsize * (lcdltdc.pwidth * sy + sx));
+	offline = lcdltdc.pwidth - (ex - sx + 1);
+#endif
+
+    /* 配置DMA2D */
+    DMA2D->CR &= ~(DMA2D_CR_START); //停止DMA2D
+    DMA2D->CR = DMA2D_R2M; //寄存器到内存
+    DMA2D->OPFCCR = LTDC_PIXEL_FORMAT_RGB565;
+    DMA2D->OOR = offline;
+    DMA2D->OMAR = addr;
+    DMA2D->NLR = (ey - sy + 1) | ((ex - sx + 1) << 16); //像素数量，高16位是行数
+    DMA2D->OCOLR = color;
+    
+    /* 启动DMA2D */
+    DMA2D->CR |= DMA2D_CR_START;
+    
+    /* 等待DMA2D传输结束 */
+    while ((DMA2D->ISR & (DMA2D_FLAG_TC)) == 0)
+    {
+        if (++timeout > 0x1FFFFF)
+        {
+            break;
+        }
+    } 
+    
+    /* 清除DMA2D传输完成标志 */
+    DMA2D->IFCR |= DMA2D_FLAG_TC;
+}
+
+void ltdc_clear(uint32_t color)
+{
+	#if LCD_DIR == 1 
+    ltdc_fill(0, 0, 480 - 1, 320 - 1, color);
+	#else
+	ltdc_fill(0, 0, lcdltdc.width - 1, lcdltdc.height - 1, color);
+	#endif
+}
 void TFT_draw_point(uint16_t x, uint16_t y, uint32_t color)
 {
 	ltdc_draw_point(x, y, color);

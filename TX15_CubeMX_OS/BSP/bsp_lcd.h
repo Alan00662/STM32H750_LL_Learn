@@ -72,7 +72,7 @@ typedef enum
 extern const unsigned char  *point;
 
 void TFT_Clear(uint16_t back_c);									//清除液晶数据，刷黑
-
+void ltdc_clear(uint32_t color);
 void TFT_send_cmd(uint8_t o_command);
 void TFT_init(void);        ////ST7796初始化
 void TFT_show_char(uint16_t x, uint16_t y, char ch, tft_lcd_font_t font, uint32_t color);

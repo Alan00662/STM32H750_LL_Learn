@@ -36,7 +36,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "board.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -109,30 +109,30 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_DMA_Init();
-  MX_MDMA_Init();
-  MX_UART5_Init();
-  MX_USART2_UART_Init();
-  MX_USART3_UART_Init();
-  MX_USART6_UART_Init();
-  MX_LTDC_Init();
-  MX_DMA2D_Init();
-  MX_I2C4_Init();
-  MX_ADC1_Init();
-  MX_ADC3_Init();
-  MX_FMC_Init();
-  MX_QUADSPI_Init();
-  MX_TIM8_Init();
-  MX_TIM3_Init();
-  MX_TIM17_Init();
-  MX_SDMMC1_SD_Init();
-  MX_RTC_Init();
-  MX_TIM4_Init();
-  MX_USART1_UART_Init();
-  MX_I2C1_Init();
-  MX_DAC1_Init();
+  // MX_DMA_Init();
+  // MX_MDMA_Init();
+  // MX_UART5_Init();
+  // MX_USART2_UART_Init();
+  // MX_USART3_UART_Init();
+  // MX_USART6_UART_Init();
+  // MX_LTDC_Init();
+  // MX_DMA2D_Init();
+  // MX_I2C4_Init();
+  // MX_ADC1_Init();
+  // MX_ADC3_Init();
+  // MX_FMC_Init();
+  // MX_QUADSPI_Init();
+  // MX_TIM8_Init();
+  // MX_TIM3_Init();
+  // MX_TIM17_Init();
+  // MX_SDMMC1_SD_Init();
+  // MX_RTC_Init();
+  // MX_TIM4_Init();
+  // MX_USART1_UART_Init();
+  // MX_I2C1_Init();
+  // MX_DAC1_Init();
   /* USER CODE BEGIN 2 */
-  HAL_GPIO_WritePin(POWER_ON_GPIO_Port, POWER_ON_Pin, GPIO_PIN_SET);
+  board_init();
   /* USER CODE END 2 */
 
   /* Init scheduler */

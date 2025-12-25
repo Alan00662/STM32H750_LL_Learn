@@ -1,6 +1,6 @@
 
 #include "bsp_lcd_gpio.h"
-#include "quadspi.h"
+#include "board.h"
 
 QSPI_HandleTypeDef qspi_tft;
 
@@ -68,13 +68,13 @@ void TFT_GPIO_init(void)
 	HAL_GPIO_Init(TFT_CS_GPIO_PORT, &GPIO_InitStruct);
   
 #if USE_LTDC_PIN_TEST
-	GPIO_InitStruct.Pin = GPIO_PIN_14;    //LTDC¡ª¡ªCLK
+	GPIO_InitStruct.Pin = GPIO_PIN_14;    //LTDCï¿½ï¿½ï¿½ï¿½CLK
 	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
 	GPIO_InitStruct.Pull = GPIO_NOPULL;
 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
 	HAL_GPIO_Init(GPIOI, &GPIO_InitStruct);
 	
-	GPIO_InitStruct.Pin = GPIO_PIN_7;    //LTDC¡ª¡ªCLK
+	GPIO_InitStruct.Pin = GPIO_PIN_7;    //LTDCï¿½ï¿½ï¿½ï¿½CLK
 	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
 	GPIO_InitStruct.Pull = GPIO_NOPULL;
 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
