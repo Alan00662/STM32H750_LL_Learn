@@ -18,10 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "dac.h"
-#include "dma.h"
 #include "quadspi.h"
-#include "tim.h"
 #include "usart.h"
 #include "gpio.h"
 #include "fmc.h"
@@ -96,15 +93,11 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_DMA_Init();
   MX_UART5_Init();
   MX_FMC_Init();
   MX_QUADSPI_Init();
-  MX_TIM17_Init();
-  MX_TIM4_Init();
-  MX_DAC1_Init();
   /* USER CODE BEGIN 2 */
-
+  Debug_String("Bootloader init OK!\r\n");
   /* USER CODE END 2 */
 
   /* Infinite loop */

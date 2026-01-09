@@ -41,7 +41,8 @@ extern UART_HandleTypeDef huart5;
 void MX_UART5_Init(void);
 
 /* USER CODE BEGIN Prototypes */
-
+void Debug_String(char *str);
+void Debug(char *fmt, ...);
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus
