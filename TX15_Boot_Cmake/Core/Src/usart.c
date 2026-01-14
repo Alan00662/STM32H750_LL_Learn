@@ -21,15 +21,10 @@
 #include "usart.h"
 
 /* USER CODE BEGIN 0 */
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <stdarg.h>
+
 /* USER CODE END 0 */
 
 UART_HandleTypeDef huart5;
-
-/* USART1 init function */
 
 /* UART5 init function */
 void MX_UART5_Init(void)
@@ -74,7 +69,6 @@ void MX_UART5_Init(void)
   /* USER CODE END UART5_Init 2 */
 
 }
-
 
 void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
 {
@@ -142,34 +136,4 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
 
 /* USER CODE BEGIN 1 */
 
-void uart5_send_buf(uint8_t *buf, uint8_t len)
-{
-    uint8_t i;
-    for (i = 0; i < len; i++)
-    {
-        HAL_UART_Transmit(&huart5, (uint8_t *)(buf + i), 1, 100);
-    }
-}
-
-void Debug_String(char *str)
-{
-    uint8_t i;
-    for (i = 0; i < strlen(str); i++)
-    {
-        HAL_UART_Transmit(&huart5, (uint8_t *)(str + i), 1, 100);
-    }
-}
-
-void Debug(char *fmt, ...)
-{
-    int len;
-    char buf[200];
-
-    va_list arguments;
-
-    va_start(arguments, fmt);
-    len = vsnprintf(buf, sizeof(buf) - 1, fmt, arguments);
-    va_end(arguments);
-    uart5_send_string(buf);
-}
 /* USER CODE END 1 */

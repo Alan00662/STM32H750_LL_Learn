@@ -82,9 +82,10 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-
+SCB->VTOR=0x90000000;
   /* USER CODE END 1 */
-
+	SCB_EnableICache();		// 使能ICache
+	SCB_EnableDCache();		// 使能DCache
   /* MPU Configuration--------------------------------------------------------*/
   MPU_Config();
 
@@ -136,11 +137,11 @@ int main(void)
   /* USER CODE END 2 */
 
   /* Init scheduler */
-  osKernelInitialize();  /* Call init function for freertos objects (in cmsis_os2.c) */
-  MX_FREERTOS_Init();
+  // osKernelInitialize();  /* Call init function for freertos objects (in cmsis_os2.c) */
+  // MX_FREERTOS_Init();
 
-  /* Start scheduler */
-  osKernelStart();
+  // /* Start scheduler */
+  // osKernelStart();
 
   /* We should never get here as control is now taken by the scheduler */
 
@@ -149,7 +150,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
+  HAL_GPIO_WritePin(GPIOI, LEDR_Pin|LEDB_Pin|LEDG_Pin, GPIO_PIN_SET);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

@@ -25,7 +25,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "BspQspiBoot.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -97,9 +97,7 @@ int main(void)
   MX_FMC_Init();
   MX_QUADSPI_Init();
   /* USER CODE BEGIN 2 */
-  Debug_String("Bootloader init OK!\r\n");
-  BspQspiBoot_MemMapped();
-	BspQspiBoot_JumpToApp();
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
