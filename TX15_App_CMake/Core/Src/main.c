@@ -6,7 +6,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2025 STMicroelectronics.
+  * Copyright (c) 2026 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -36,7 +36,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "board.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -82,7 +82,9 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-
+  SCB->VTOR = 0x90000000;
+  SCB_EnableICache();		// 使能ICache
+	SCB_EnableDCache();		// 使能DCache
   /* USER CODE END 1 */
 
   /* MPU Configuration--------------------------------------------------------*/
@@ -111,7 +113,7 @@ int main(void)
   MX_GPIO_Init();
   // MX_DMA_Init();
   // MX_MDMA_Init();
-  // MX_UART5_Init();
+  MX_UART5_Init();
   // MX_USART2_UART_Init();
   // MX_USART3_UART_Init();
   // MX_USART6_UART_Init();
@@ -132,7 +134,9 @@ int main(void)
   // MX_I2C1_Init();
   // MX_DAC1_Init();
   /* USER CODE BEGIN 2 */
-  board_init();
+  HAL_GPIO_WritePin(POWER_ON_GPIO_Port, POWER_ON_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOI, LEDR_Pin | LEDB_Pin | LEDG_Pin, GPIO_PIN_SET);
+  
   /* USER CODE END 2 */
 
   /* Init scheduler */
@@ -149,7 +153,9 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-  HAL_GPIO_WritePin(GPIOI, LEDR_Pin|LEDB_Pin|LEDG_Pin, GPIO_PIN_SET);
+
+    HAL_GPIO_TogglePin(GPIOI, LEDG_Pin);
+    HAL_Delay(300);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
