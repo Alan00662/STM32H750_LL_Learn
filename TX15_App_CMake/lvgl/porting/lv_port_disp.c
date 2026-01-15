@@ -11,7 +11,7 @@
  *********************/
 #include "lv_port_disp.h"
 #include "lvgl.h"
-#include "bsp_gt911.h"
+#include "driver_gt911.h"
 #include "main.h"
 /*********************
  *      DEFINES

@@ -101,8 +101,12 @@ void MPU_Config(void)
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-    if (htim->Instance == TIM13)
-    {
-      HAL_IncTick();
-    }
+  if (htim->Instance == TIM13)
+  {
+    HAL_IncTick();
+  }
+  else if (htim->Instance == TIM6)
+  {
+    lv_tick_inc(1);
+  }
 }
