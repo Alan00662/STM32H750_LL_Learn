@@ -1,6 +1,6 @@
 #include "main.h"
 #include "tim.h"
-#include "lv_hal_tick.h"
+#include "lv_tick.h"
 void SystemClock_Config(void)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};

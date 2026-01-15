@@ -66,6 +66,7 @@ file(GLOB LVGL_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/src/hal/*.c
     ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/src/misc/*.c
     ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/src/widgets/*.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/src/tick/*.c
 
 
     )
@@ -107,6 +108,7 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/src/hal
     ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/src/misc
     ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/src/widgets
+    ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/src/tick
 
 
 )
