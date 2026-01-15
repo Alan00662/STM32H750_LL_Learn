@@ -22,14 +22,14 @@ void board_init(void)
   LED_BLUE_ON();
   Debug_init();
   MX_I2C4_Init();
+  backlight_init();
+  backlight_pwm(100);
   st7796_init();
   MX_LTDC_Init();
-  //  MX_USART2_UART_Init();
   MX_DMA2D_Init();
   MX_TIM6_Init();
   HAL_Delay(10);
 
-  //	RB_Init(&rb,buffer,BUFFER_SIZE);
   app_lvgl_init();
   HAL_TIM_Base_Start_IT(&htim6);
   Debug("Board Init Success!\r\n");

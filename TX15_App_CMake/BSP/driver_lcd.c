@@ -9,7 +9,7 @@
 #define TFT_LINE_NUMBER  	320
 #endif 
 
-uint16_t backlight_pwm = 70;//70%
+uint16_t backlight_val = 70;//70%
 const unsigned char  *point;
 
 static void TFT_GPIO_init(void)

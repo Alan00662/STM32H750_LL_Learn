@@ -119,7 +119,7 @@
 #define TP_INT_Pin GPIO_PIN_2
 #define TP_INT_GPIO_Port GPIOE
 // backlight
-#define BACKLIGHT_USE_PWM
+// #define BACKLIGHT_USE_PWM
 #define BACKLIGHT_Pin GPIO_PIN_10
 #define BACKLIGHT_GPIO_Port GPIOA
 #define BACKLIGHT_AF  GPIO_AF1_TIM1

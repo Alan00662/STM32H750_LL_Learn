@@ -47,6 +47,7 @@ file(GLOB BSP_SOURCES
 file(GLOB LVGL_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/app/*.c
     ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/demos/widgets/*.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/demos/widgets/assets/*.c
     ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/porting/*.c
     ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/src/core/*.c
     ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/src/draw/*.c
@@ -88,6 +89,7 @@ file(GLOB LVGL_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/src/misc/*.c
     ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/src/widgets/*.c
 
+
     )
 # Link directories setup
 target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
@@ -109,6 +111,7 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/app
     ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/demos
     ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/demos/widgets
+    ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/demos/widgets/assets
     ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/porting
     ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/src
     ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/src/core
@@ -130,10 +133,6 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/src/extra/themes/basic
     ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/src/extra/themes/basic
     ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/src/extra/themes/default
-    ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/src/font
-    ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/src/hal
-    ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/src/misc
-    ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/src/widgets
     ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/src/extra/widgets/animimg
     ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/src/extra/widgets/calendar
     ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/src/extra/widgets/chart
@@ -151,6 +150,12 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/src/extra/widgets/tabview
     ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/src/extra/widgets/tileview
     ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/src/extra/widgets/win
+    ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/src/font
+    ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/src/hal
+    ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/src/misc
+    ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/src/widgets
+
+
 )
 
 # Add project symbols (macros)

@@ -19,6 +19,7 @@ extern "C" {
 #include "driver_gt911.h"
 #include "driver_lcd.h"
 #include "system_clock.h"
+#include "driver_backlight.h"
 
 #include "app.h"
 void board_init(void);

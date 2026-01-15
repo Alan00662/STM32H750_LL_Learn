@@ -7,7 +7,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2026 STMicroelectronics.
+  * Copyright (c) 2024 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -21,7 +21,7 @@
 #include "ltdc.h"
 
 /* USER CODE BEGIN 0 */
-
+extern uint16_t LTDC_BUFF[];
 /* USER CODE END 0 */
 
 LTDC_HandleTypeDef hltdc;
@@ -43,7 +43,7 @@ void MX_LTDC_Init(void)
   hltdc.Init.HSPolarity = LTDC_HSPOLARITY_AL;
   hltdc.Init.VSPolarity = LTDC_VSPOLARITY_AL;
   hltdc.Init.DEPolarity = LTDC_DEPOLARITY_AL;
-  hltdc.Init.PCPolarity = LTDC_PCPOLARITY_IPC;
+  hltdc.Init.PCPolarity = LTDC_PCPOLARITY_IIPC;
   hltdc.Init.HorizontalSync = 5;
   hltdc.Init.VerticalSync = 1;
   hltdc.Init.AccumulatedHBP = 25;
@@ -69,8 +69,8 @@ void MX_LTDC_Init(void)
   pLayerCfg.BlendingFactor1 = LTDC_BLENDING_FACTOR1_CA;
   pLayerCfg.BlendingFactor2 = LTDC_BLENDING_FACTOR2_CA;
   pLayerCfg.FBStartAdress = 0;
-  pLayerCfg.ImageWidth = 0;
-  pLayerCfg.ImageHeight = 0;
+	pLayerCfg.ImageWidth = 320;
+  pLayerCfg.ImageHeight = 480;
   pLayerCfg.Backcolor.Blue = 0;
   pLayerCfg.Backcolor.Green = 0;
   pLayerCfg.Backcolor.Red = 0;
@@ -80,6 +80,12 @@ void MX_LTDC_Init(void)
   }
   /* USER CODE BEGIN LTDC_Init 2 */
 
+	pLayerCfg.FBStartAdress = (uint32_t)LTDC_BUFF;
+    if (HAL_LTDC_ConfigLayer(&hltdc, &pLayerCfg, 0) != HAL_OK)
+  {
+    Error_Handler();
+  }
+	
   /* USER CODE END LTDC_Init 2 */
 
 }
@@ -98,13 +104,13 @@ void HAL_LTDC_MspInit(LTDC_HandleTypeDef* ltdcHandle)
   /** Initializes the peripherals clock
   */
     PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_LTDC;
-    PeriphClkInitStruct.PLL3.PLL3M = 1;
-    PeriphClkInitStruct.PLL3.PLL3N = 4;
+    PeriphClkInitStruct.PLL3.PLL3M = 6;
+    PeriphClkInitStruct.PLL3.PLL3N = 20;
     PeriphClkInitStruct.PLL3.PLL3P = 2;
     PeriphClkInitStruct.PLL3.PLL3Q = 2;
-    PeriphClkInitStruct.PLL3.PLL3R = 18;
+    PeriphClkInitStruct.PLL3.PLL3R = 14;
     PeriphClkInitStruct.PLL3.PLL3RGE = RCC_PLL3VCIRANGE_3;
-    PeriphClkInitStruct.PLL3.PLL3VCOSEL = RCC_PLL3VCOWIDE;
+    PeriphClkInitStruct.PLL3.PLL3VCOSEL = RCC_PLL3VCOMEDIUM;
     PeriphClkInitStruct.PLL3.PLL3FRACN = 0;
     if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
     {
@@ -165,9 +171,6 @@ void HAL_LTDC_MspInit(LTDC_HandleTypeDef* ltdcHandle)
     GPIO_InitStruct.Alternate = GPIO_AF14_LTDC;
     HAL_GPIO_Init(GPIOI, &GPIO_InitStruct);
 
-    /* LTDC interrupt Init */
-    HAL_NVIC_SetPriority(LTDC_IRQn, 5, 0);
-    HAL_NVIC_EnableIRQ(LTDC_IRQn);
   /* USER CODE BEGIN LTDC_MspInit 1 */
 
   /* USER CODE END LTDC_MspInit 1 */
@@ -218,8 +221,6 @@ void HAL_LTDC_MspDeInit(LTDC_HandleTypeDef* ltdcHandle)
 
     HAL_GPIO_DeInit(GPIOI, GPIO_PIN_12|GPIO_PIN_13|GPIO_PIN_14);
 
-    /* LTDC interrupt Deinit */
-    HAL_NVIC_DisableIRQ(LTDC_IRQn);
   /* USER CODE BEGIN LTDC_MspDeInit 1 */
 
   /* USER CODE END LTDC_MspDeInit 1 */
