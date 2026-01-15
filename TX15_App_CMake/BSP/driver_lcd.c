@@ -1,4 +1,4 @@
-#include "driver_lcd.h"
+#include "board.h"
 
 
 #if LCD_DIR ==0
@@ -17,15 +17,6 @@ static void TFT_GPIO_init(void)
 
   GPIO_InitTypeDef GPIO_InitStruct = {0};
 
-  /* GPIO Ports Clock Enable */
-  __HAL_RCC_GPIOA_CLK_ENABLE();
-	__HAL_RCC_GPIOB_CLK_ENABLE();
-  __HAL_RCC_GPIOG_CLK_ENABLE();
-  __HAL_RCC_GPIOH_CLK_ENABLE();
-  __HAL_RCC_GPIOI_CLK_ENABLE();
-  __HAL_RCC_GPIOJ_CLK_ENABLE();
-  __HAL_RCC_GPIOK_CLK_ENABLE();
-  __HAL_RCC_GPIOF_CLK_ENABLE();
   
 
   GPIO_InitStruct.Pin = TFT_BL_GPIO_PIN;
@@ -117,8 +108,6 @@ static void SPI_WriteData(unsigned char i)
 void st7796_init(void)        ////ST7796
 {
 	TFT_GPIO_init();
-
-	TFT_BL(1);
 	
 	TFT_CS(0);
 	TFT_RST(1);	

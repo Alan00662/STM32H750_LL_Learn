@@ -12,7 +12,7 @@
 #include "lv_port_disp.h"
 #include "lvgl.h"
 #include "driver_gt911.h"
-#include "main.h"
+#include "board.h"
 /*********************
  *      DEFINES
  *********************/
