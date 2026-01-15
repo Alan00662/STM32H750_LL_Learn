@@ -15,9 +15,14 @@ UART_HandleTypeDef uart_debug;
 void Debug_init(void)
 {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
-
+  RCC_PeriphCLKInitTypeDef PeriphClkInitStruct = {0};
   DEBUG_CLK();
-
+  PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_UART5;
+  PeriphClkInitStruct.Usart234578ClockSelection = RCC_USART234578CLKSOURCE_D2PCLK1;
+  if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
+  {
+    Error_Handler();
+  }
   GPIO_InitStruct.Pin = DEBUG_TX_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
@@ -40,12 +45,26 @@ void Debug_init(void)
   uart_debug.Init.Mode = UART_MODE_TX_RX;
   uart_debug.Init.HwFlowCtl = UART_HWCONTROL_NONE;
   uart_debug.Init.OverSampling = UART_OVERSAMPLING_16;
-
+  uart_debug.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
+  uart_debug.Init.ClockPrescaler = UART_PRESCALER_DIV1;
+  uart_debug.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
   if (HAL_UART_Init(&uart_debug) != HAL_OK)
   {
     Error_Handler();
   }
 
+  if (HAL_UARTEx_SetTxFifoThreshold(&uart_debug, UART_TXFIFO_THRESHOLD_1_8) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_UARTEx_SetRxFifoThreshold(&uart_debug, UART_RXFIFO_THRESHOLD_1_8) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_UARTEx_DisableFifoMode(&uart_debug) != HAL_OK)
+  {
+    Error_Handler();
+  }
 
 }
 

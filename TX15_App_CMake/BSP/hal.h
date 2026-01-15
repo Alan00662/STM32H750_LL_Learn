@@ -111,6 +111,13 @@
 
 #define LCDWIDTH                480
 #define LCDHEIGHT               320
+#define LCD_DIR  1
+
+// touch
+#define TP_RST_Pin GPIO_PIN_13
+#define TP_RST_GPIO_Port GPIOJ
+#define TP_INT_Pin GPIO_PIN_2
+#define TP_INT_GPIO_Port GPIOE
 // backlight
 #define BACKLIGHT_USE_PWM
 #define BACKLIGHT_Pin GPIO_PIN_10
@@ -256,7 +263,7 @@
 #define DEBUG_TX_AF             GPIO_AF14_UART5
 #define DEBUG_RX_Pin            GPIO_PIN_5
 #define DEBUG_RX_GPIO_Port      GPIOB
-#define DEBUG_RX_AF GPIO_AF14_UART5
+#define DEBUG_RX_AF             GPIO_AF14_UART5
 #define DEBUG_UART              UART5
 #define DEBUG_CLK()             __HAL_RCC_UART5_CLK_ENABLE()
 #define DEBUG_PERCLK            RCC_PERIPHCLK_UART5

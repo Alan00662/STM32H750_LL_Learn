@@ -20,6 +20,7 @@ void board_init(void)
   POWER_ON();
   /**power on! */
   LED_BLUE_ON();
-  
+  Debug_init();
+  Debug("Board Init Success!\r\n");
   LED_BLUE_OFF();
 }
