@@ -57,8 +57,9 @@ static void GT911_RD_Reg(uint16_t reg,uint8_t *buf,uint8_t len)
 }
 
 //初始化
-void gt911_init(void) {
-  set_float();
+void gt911_init(void)
+{
+  gt911_gpio_init();
 	HAL_Delay(100); 
 	uint8_t temp[5]={0};
 	HAL_GPIO_WritePin(TP_RST_GPIO_Port,TP_RST_Pin,GPIO_PIN_RESET);				//复位

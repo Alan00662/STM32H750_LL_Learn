@@ -25,7 +25,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "dma2d.h"
+#include "debug.h"
 #include "app.h"
 /* USER CODE END Includes */
 
@@ -148,6 +148,7 @@ void StartDefaultTask(void *argument)
 void led_task(void *argument)
 {
   /* USER CODE BEGIN led_task */
+  Debug("UI_task Idle:%d(Word)\n",uxTaskGetStackHighWaterMark(GUI_TaskHandle));
   /* Infinite loop */
   for(;;)
   {
