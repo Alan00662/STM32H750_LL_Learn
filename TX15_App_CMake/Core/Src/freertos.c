@@ -75,7 +75,7 @@ const osThreadAttr_t GUI_Task_attributes = {
 
 void StartDefaultTask(void *argument);
 void led_task(void *argument);
-void StartTask02(void *argument);
+void UI_task(void *argument);
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
 /**
@@ -110,7 +110,7 @@ void MX_FREERTOS_Init(void) {
 
   /* creation of LedTask */
   LedTaskHandle = osThreadNew(led_task, NULL, &LedTask_attributes);
-  GUI_TaskHandle = osThreadNew(StartTask02, NULL, &GUI_Task_attributes);
+  GUI_TaskHandle = osThreadNew(UI_task, NULL, &GUI_Task_attributes);
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
   /* USER CODE END RTOS_THREADS */
@@ -156,9 +156,9 @@ void led_task(void *argument)
   }
   /* USER CODE END led_task */
 }
-void StartTask02(void *argument)
+void UI_task(void *argument)
 {
-  /* USER CODE BEGIN StartTask02 */
+  /* USER CODE BEGIN UI_task */
 
   app_entry();
 	
@@ -166,9 +166,9 @@ void StartTask02(void *argument)
 	for(;;)
   {
 		lv_task_handler();
-		osDelay(20);
+		osDelay(5);
   }
-  /* USER CODE END StartTask02 */
+  /* USER CODE END UI_task */
 }
 
 /* Private application code --------------------------------------------------*/

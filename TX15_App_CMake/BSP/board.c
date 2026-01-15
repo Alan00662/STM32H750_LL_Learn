@@ -7,7 +7,7 @@ void board_init(void)
   HAL_Init();
   SCB_EnableICache();   
 	SCB_EnableDCache();
-  // SCB->CACR|=1<<2;
+  SCB->CACR|=1<<2;
   MPU_Config();
   HAL_Init();
   SystemClock_Config();
