@@ -166,7 +166,7 @@ void UI_task(void *argument)
 	for(;;)
   {
 		lv_task_handler();
-		osDelay(5);
+		osDelay(10);
   }
   /* USER CODE END UI_task */
 }
