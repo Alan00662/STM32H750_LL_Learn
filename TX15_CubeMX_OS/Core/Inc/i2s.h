@@ -1,13 +1,13 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * File Name          : FMC.h
-  * Description        : This file provides code for the configuration
-  *                      of the FMC peripheral.
+  * @file    i2s.h
+  * @brief   This file contains all the function prototypes for
+  *          the i2s.c file
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2025 STMicroelectronics.
+  * Copyright (c) 2026 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -18,10 +18,11 @@
   */
 /* USER CODE END Header */
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __FMC_H
-#define __FMC_H
+#ifndef __I2S_H__
+#define __I2S_H__
+
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
@@ -31,15 +32,13 @@
 
 /* USER CODE END Includes */
 
-extern SDRAM_HandleTypeDef hsdram1;
+extern I2S_HandleTypeDef hi2s2;
 
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
 
-void MX_FMC_Init(void);
-void HAL_SDRAM_MspInit(SDRAM_HandleTypeDef* hsdram);
-void HAL_SDRAM_MspDeInit(SDRAM_HandleTypeDef* hsdram);
+void MX_I2S2_Init(void);
 
 /* USER CODE BEGIN Prototypes */
 
@@ -48,12 +47,6 @@ void HAL_SDRAM_MspDeInit(SDRAM_HandleTypeDef* hsdram);
 #ifdef __cplusplus
 }
 #endif
-#endif /*__FMC_H */
 
-/**
-  * @}
-  */
+#endif /* __I2S_H__ */
 
-/**
-  * @}
-  */

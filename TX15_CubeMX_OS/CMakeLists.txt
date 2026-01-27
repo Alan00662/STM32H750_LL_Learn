@@ -24,8 +24,6 @@ set(CMAKE_PROJECT_NAME TX15_CubeMX_OS)
 # Enable compile command to ease indexing with e.g. clangd
 set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
 
-# Include toolchain file
-include("cmake/gcc-arm-none-eabi.cmake")
 
 # Core project settings
 project(${CMAKE_PROJECT_NAME})
@@ -45,14 +43,12 @@ target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined library search paths
 )
 
-file(GLOB BSP_SOURCES
-    ${CMAKE_CURRENT_SOURCE_DIR}/BSP/*.c)
 # Add sources to executable
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user sources here
     # ${CMAKE_CURRENT_SOURCE_DIR}/BSP/bsp_lcd_gpio.c
     # ${CMAKE_CURRENT_SOURCE_DIR}/BSP/bsp_lcd.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/BSP/board.c
+
 )
 
 # Add include paths

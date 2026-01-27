@@ -27,7 +27,6 @@
 TIM_HandleTypeDef htim3;
 TIM_HandleTypeDef htim4;
 TIM_HandleTypeDef htim8;
-TIM_HandleTypeDef htim17;
 DMA_HandleTypeDef hdma_tim3_ch2;
 DMA_HandleTypeDef hdma_tim8_ch4;
 
@@ -197,33 +196,6 @@ void MX_TIM8_Init(void)
   HAL_TIM_MspPostInit(&htim8);
 
 }
-/* TIM17 init function */
-void MX_TIM17_Init(void)
-{
-
-  /* USER CODE BEGIN TIM17_Init 0 */
-
-  /* USER CODE END TIM17_Init 0 */
-
-  /* USER CODE BEGIN TIM17_Init 1 */
-
-  /* USER CODE END TIM17_Init 1 */
-  htim17.Instance = TIM17;
-  htim17.Init.Prescaler = 4;
-  htim17.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim17.Init.Period = 1000;
-  htim17.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-  htim17.Init.RepetitionCounter = 0;
-  htim17.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
-  if (HAL_TIM_Base_Init(&htim17) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN TIM17_Init 2 */
-
-  /* USER CODE END TIM17_Init 2 */
-
-}
 
 void HAL_TIM_PWM_MspInit(TIM_HandleTypeDef* tim_pwmHandle)
 {
@@ -238,7 +210,7 @@ void HAL_TIM_PWM_MspInit(TIM_HandleTypeDef* tim_pwmHandle)
 
     /* TIM3 DMA Init */
     /* TIM3_CH2 Init */
-    hdma_tim3_ch2.Instance = DMA1_Stream0;
+    hdma_tim3_ch2.Instance = DMA1_Stream3;
     hdma_tim3_ch2.Init.Request = DMA_REQUEST_TIM3_CH2;
     hdma_tim3_ch2.Init.Direction = DMA_PERIPH_TO_MEMORY;
     hdma_tim3_ch2.Init.PeriphInc = DMA_PINC_DISABLE;
@@ -285,7 +257,7 @@ void HAL_TIM_OC_MspInit(TIM_HandleTypeDef* tim_ocHandle)
 
     /* TIM8 DMA Init */
     /* TIM8_CH4 Init */
-    hdma_tim8_ch4.Instance = DMA1_Stream1;
+    hdma_tim8_ch4.Instance = DMA1_Stream2;
     hdma_tim8_ch4.Init.Request = DMA_REQUEST_TIM8_CH4;
     hdma_tim8_ch4.Init.Direction = DMA_PERIPH_TO_MEMORY;
     hdma_tim8_ch4.Init.PeriphInc = DMA_PINC_DISABLE;
@@ -310,26 +282,6 @@ void HAL_TIM_OC_MspInit(TIM_HandleTypeDef* tim_ocHandle)
   /* USER CODE BEGIN TIM8_MspInit 1 */
 
   /* USER CODE END TIM8_MspInit 1 */
-  }
-}
-
-void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* tim_baseHandle)
-{
-
-  if(tim_baseHandle->Instance==TIM17)
-  {
-  /* USER CODE BEGIN TIM17_MspInit 0 */
-
-  /* USER CODE END TIM17_MspInit 0 */
-    /* TIM17 clock enable */
-    __HAL_RCC_TIM17_CLK_ENABLE();
-
-    /* TIM17 interrupt Init */
-    HAL_NVIC_SetPriority(TIM17_IRQn, 5, 0);
-    HAL_NVIC_EnableIRQ(TIM17_IRQn);
-  /* USER CODE BEGIN TIM17_MspInit 1 */
-
-  /* USER CODE END TIM17_MspInit 1 */
   }
 }
 void HAL_TIM_MspPostInit(TIM_HandleTypeDef* timHandle)
@@ -453,25 +405,6 @@ void HAL_TIM_OC_MspDeInit(TIM_HandleTypeDef* tim_ocHandle)
   /* USER CODE BEGIN TIM8_MspDeInit 1 */
 
   /* USER CODE END TIM8_MspDeInit 1 */
-  }
-}
-
-void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* tim_baseHandle)
-{
-
-  if(tim_baseHandle->Instance==TIM17)
-  {
-  /* USER CODE BEGIN TIM17_MspDeInit 0 */
-
-  /* USER CODE END TIM17_MspDeInit 0 */
-    /* Peripheral clock disable */
-    __HAL_RCC_TIM17_CLK_DISABLE();
-
-    /* TIM17 interrupt Deinit */
-    HAL_NVIC_DisableIRQ(TIM17_IRQn);
-  /* USER CODE BEGIN TIM17_MspDeInit 1 */
-
-  /* USER CODE END TIM17_MspDeInit 1 */
   }
 }
 

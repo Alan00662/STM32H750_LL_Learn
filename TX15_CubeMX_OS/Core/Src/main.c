@@ -24,19 +24,18 @@
 #include "dma.h"
 #include "dma2d.h"
 #include "i2c.h"
+#include "i2s.h"
 #include "ltdc.h"
-#include "mdma.h"
 #include "quadspi.h"
 #include "rtc.h"
 #include "sdmmc.h"
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
-#include "fmc.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "board.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -109,38 +108,36 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  // MX_DMA_Init();
-  // MX_MDMA_Init();
-  // MX_UART5_Init();
-  // MX_USART2_UART_Init();
-  // MX_USART3_UART_Init();
-  // MX_USART6_UART_Init();
-  // MX_LTDC_Init();
-  // MX_DMA2D_Init();
-  // MX_I2C4_Init();
-  // MX_ADC1_Init();
-  // MX_ADC3_Init();
-  // MX_FMC_Init();
-  // MX_QUADSPI_Init();
-  // MX_TIM8_Init();
-  // MX_TIM3_Init();
-  // MX_TIM17_Init();
-  // MX_SDMMC1_SD_Init();
-  // MX_RTC_Init();
-  // MX_TIM4_Init();
-  // MX_USART1_UART_Init();
-  // MX_I2C1_Init();
-  // MX_DAC1_Init();
+  MX_DMA_Init();
+  MX_UART5_Init();
+  MX_USART2_UART_Init();
+  MX_USART3_UART_Init();
+  MX_USART6_UART_Init();
+  MX_LTDC_Init();
+  MX_DMA2D_Init();
+  MX_I2C4_Init();
+  MX_ADC1_Init();
+  MX_ADC3_Init();
+  MX_QUADSPI_Init();
+  MX_TIM8_Init();
+  MX_TIM3_Init();
+  MX_RTC_Init();
+  MX_TIM4_Init();
+  MX_USART1_UART_Init();
+  MX_DAC1_Init();
+  MX_SDMMC2_MMC_Init();
+  MX_SDMMC1_SD_Init();
+  MX_I2S2_Init();
   /* USER CODE BEGIN 2 */
-  board_init();
+
   /* USER CODE END 2 */
 
   /* Init scheduler */
-  // osKernelInitialize();  /* Call init function for freertos objects (in cmsis_os2.c) */
-  // MX_FREERTOS_Init();
+  osKernelInitialize();  /* Call init function for freertos objects (in cmsis_os2.c) */
+  MX_FREERTOS_Init();
 
-  // /* Start scheduler */
-  // osKernelStart();
+  /* Start scheduler */
+  osKernelStart();
 
   /* We should never get here as control is now taken by the scheduler */
 
@@ -149,7 +146,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-  HAL_GPIO_WritePin(GPIOI, LEDR_Pin|LEDB_Pin|LEDG_Pin, GPIO_PIN_SET);
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -252,13 +249,13 @@ void MPU_Config(void)
   */
   MPU_InitStruct.Enable = MPU_REGION_ENABLE;
   MPU_InitStruct.Number = MPU_REGION_NUMBER0;
-  MPU_InitStruct.BaseAddress = 0x0;
-  MPU_InitStruct.Size = MPU_REGION_SIZE_4GB;
-  MPU_InitStruct.SubRegionDisable = 0x87;
-  MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
+  MPU_InitStruct.BaseAddress = 0x24000000;
+  MPU_InitStruct.Size = MPU_REGION_SIZE_512KB;
+  MPU_InitStruct.SubRegionDisable = 0x00;
+  MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL1;
   MPU_InitStruct.AccessPermission = MPU_REGION_NO_ACCESS;
-  MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_DISABLE;
-  MPU_InitStruct.IsShareable = MPU_ACCESS_SHAREABLE;
+  MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_ENABLE;
+  MPU_InitStruct.IsShareable = MPU_ACCESS_NOT_SHAREABLE;
   MPU_InitStruct.IsCacheable = MPU_ACCESS_NOT_CACHEABLE;
   MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
 
