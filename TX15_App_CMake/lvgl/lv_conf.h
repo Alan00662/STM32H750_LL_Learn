@@ -259,7 +259,7 @@
  * Others
  *-----------*/
 
-#define LV_ENABLE_GLOBAL_CUSTOM 0
+#define LV_ENABLE_GLOBAL_CUSTOM 1
 #if LV_ENABLE_GLOBAL_CUSTOM
     /*Header to include for the custom 'lv_global' function"*/
     #define LV_GLOBAL_CUSTOM_INCLUDE <stdint.h>
@@ -854,7 +854,7 @@
 #endif
 
 /*Use Nuttx to open window and handle touchscreen*/
-#define LV_USE_NUTTX    0
+#define LV_USE_NUTTX    1
 
 #if LV_USE_NUTTX
     #define LV_USE_NUTTX_LIBUV    0

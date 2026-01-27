@@ -67,8 +67,11 @@ file(GLOB LVGL_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/src/misc/*.c
     ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/src/widgets/*.c
     ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/src/tick/*.c
-
-
+    ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/src/display/*.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/src/layouts/grid/*.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/src/stdlib/*.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/src/stdlib/builtin/*c
+    ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/src/drivers/nuttx/*c
     )
 # Link directories setup
 target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
@@ -109,7 +112,11 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/src/misc
     ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/src/widgets
     ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/src/tick
-
+    ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/src/display
+    ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/src/layouts/grid
+    ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/src/stdlib
+    ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/src/stdlib/builtin
+    ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/src/drivers/nuttx
 
 )
 

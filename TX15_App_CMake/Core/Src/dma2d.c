@@ -73,7 +73,7 @@ void HAL_DMA2D_MspInit(DMA2D_HandleTypeDef* dma2dHandle)
     /* DMA2D clock enable */
     __HAL_RCC_DMA2D_CLK_ENABLE();
   /* USER CODE BEGIN DMA2D_MspInit 1 */
-		HAL_NVIC_SetPriority(DMA2D_IRQn, 0, 0);
+		HAL_NVIC_SetPriority(DMA2D_IRQn, 5, 0);
     HAL_NVIC_EnableIRQ(DMA2D_IRQn);
   /* USER CODE END DMA2D_MspInit 1 */
   }
@@ -90,7 +90,7 @@ void HAL_DMA2D_MspDeInit(DMA2D_HandleTypeDef* dma2dHandle)
     /* Peripheral clock disable */
     __HAL_RCC_DMA2D_CLK_DISABLE();
   /* USER CODE BEGIN DMA2D_MspDeInit 1 */
-
+    HAL_NVIC_DisableIRQ(DMA2D_IRQn);
   /* USER CODE END DMA2D_MspDeInit 1 */
   }
 }
@@ -134,4 +134,30 @@ void DMA2D_MemCopy(uint32_t pixelFormat, void * pSrc, void * pDst, int xSize, in
     while (DMA2D->CR & DMA2D_CR_START) {}
 }
 
+void ltdc_color_fill(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t *px_map, uint32_t framebuffer)
+{
+    uint16_t offline;
+    uint32_t addr;
+
+    offline = 800 - (x2 - x1 + 1);   /* 行偏移:当前行最后一个像素和下一行第一个像素之间的像素数目 */
+    addr = ((uint32_t)framebuffer + 2 * (800 * y1 + x1));
+	SCB_CleanInvalidateDCache();
+    __HAL_RCC_DMA2D_CLK_ENABLE();                             /* 使能DM2D时钟 */
+
+    DMA2D->CR &= ~(DMA2D_CR_START);                           /* 先停止DMA2D */
+    DMA2D->CR = DMA2D_M2M;                                    /* 存储器到存储器模式 */
+    DMA2D->FGPFCCR = LTDC_PIXEL_FORMAT_RGB565;                   /* 设置前景层颜色格式 */
+    DMA2D->FGOR = 0;                                          /* 前景层行偏移为0 */
+    DMA2D->OOR = offline;                                     /* 设置行偏移 */
+
+    DMA2D->FGMAR = (uint32_t)px_map;                           /* 源地址 */
+    DMA2D->OMAR = addr;                                       /* 输出存储器地址 */
+    DMA2D->NLR = (y2 - y1 + 1) | ((x2 - x1 + 1) << 16);   /* 设定行数寄存器 */
+    DMA2D->CR |= DMA2D_CR_START;                              /* 启动DMA2D */
+	  
+	__HAL_DMA2D_ENABLE_IT(&hdma2d,DMA2D_IT_TC);
+	__HAL_DMA2D_ENABLE(&hdma2d);
+
+
+} 
 /* USER CODE END 1 */

@@ -68,7 +68,7 @@ void MX_LTDC_Init(void)
   pLayerCfg.Alpha0 = 0;
   pLayerCfg.BlendingFactor1 = LTDC_BLENDING_FACTOR1_CA;
   pLayerCfg.BlendingFactor2 = LTDC_BLENDING_FACTOR2_CA;
-  pLayerCfg.FBStartAdress = 0;
+  pLayerCfg.FBStartAdress = 0xD0000000;
 	pLayerCfg.ImageWidth = 320;
   pLayerCfg.ImageHeight = 480;
   pLayerCfg.Backcolor.Blue = 0;
@@ -80,11 +80,6 @@ void MX_LTDC_Init(void)
   }
   /* USER CODE BEGIN LTDC_Init 2 */
 
-	pLayerCfg.FBStartAdress = (uint32_t)LTDC_BUFF;
-    if (HAL_LTDC_ConfigLayer(&hltdc, &pLayerCfg, 0) != HAL_OK)
-  {
-    Error_Handler();
-  }
 	
   /* USER CODE END LTDC_Init 2 */
 
@@ -172,7 +167,9 @@ void HAL_LTDC_MspInit(LTDC_HandleTypeDef* ltdcHandle)
     HAL_GPIO_Init(GPIOI, &GPIO_InitStruct);
 
   /* USER CODE BEGIN LTDC_MspInit 1 */
-
+	HAL_LTDC_ProgramLineEvent(&hltdc, 1 );	
+	HAL_NVIC_SetPriority(LTDC_IRQn, 0xE, 0);
+	HAL_NVIC_EnableIRQ(LTDC_IRQn);
   /* USER CODE END LTDC_MspInit 1 */
   }
 }

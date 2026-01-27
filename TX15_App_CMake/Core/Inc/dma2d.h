@@ -43,6 +43,7 @@ void MX_DMA2D_Init(void);
 /* USER CODE BEGIN Prototypes */
 void DMA2D_Fill( void * pDst, uint32_t width, uint32_t height, uint32_t lineOff, uint32_t pixelFormat,  uint32_t color);
 void FillRect(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t color);
+void ltdc_color_fill(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t *px_map, uint32_t framebuffer);
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus
