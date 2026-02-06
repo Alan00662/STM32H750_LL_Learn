@@ -111,7 +111,7 @@
 
 #define LCDWIDTH                480
 #define LCDHEIGHT               320
-#define LCD_DIR  1
+#define LCD_DIR  0
 
 // touch
 #define TP_RST_Pin GPIO_PIN_13
