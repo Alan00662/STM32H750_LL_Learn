@@ -33,8 +33,6 @@
 /* USER CODE END 1 */
 
 /** Configure pins
-     PB9   ------> I2C1_SDA
-     PB8   ------> I2C1_SCL
      PA10   ------> S_TIM1_CH3
      PG5   ------> FMC_A15_BA1
      PG2   ------> FMC_A12
@@ -83,14 +81,6 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(MDL_GPIO_Port, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : PB9 PB8 */
-  GPIO_InitStruct.Pin = GPIO_PIN_9|GPIO_PIN_8;
-  GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  GPIO_InitStruct.Alternate = GPIO_AF4_I2C1;
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PA10 */
   GPIO_InitStruct.Pin = GPIO_PIN_10;

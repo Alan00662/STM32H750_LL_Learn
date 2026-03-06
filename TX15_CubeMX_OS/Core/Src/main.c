@@ -128,6 +128,7 @@ int main(void)
   MX_SDMMC2_MMC_Init();
   MX_SDMMC1_SD_Init();
   MX_I2S2_Init();
+  MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
